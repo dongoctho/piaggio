@@ -14,4 +14,5 @@ interface ProductRepositoryInterface extends BaseRepositoryInterface
     public function getProduct();
     public function findIdProduct($product_id);
     public function countProduct();
+    public function getNewProduct(array $column = ['*']);
 }

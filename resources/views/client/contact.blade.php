@@ -1,264 +1,200 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="utf-8">
-    <title>Shop Bán Đồ Gia Dụng</title>
-    <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <meta content="Free HTML Templates" name="keywords">
-    <meta content="Free HTML Templates" name="description">
 
-     <!-- Favicon -->
-     <link href="https://cdn-icons-png.flaticon.com/512/3771/3771009.png" rel="icon">
+     <title>PHPJabber | Car Rental Website Template</title>
 
-     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+     <meta charset="UTF-8">
+     <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+     <meta name="description" content="">
+     <meta name="keywords" content="">
+     <meta name="author" content="">
+     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-     <!-- Google Web Fonts -->
-     <link rel="preconnect" href="https://fonts.gstatic.com">
-     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+     <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}">
+     <link rel="stylesheet" href="{{ asset('css/font-awesome.min.css') }}">
+     <link rel="stylesheet" href="{{ asset('css/owl.carousel.css') }}">
+     <link rel="stylesheet" href="{{ asset('css/owl.theme.default.min.css') }}">
 
-     <!-- Font Awesome -->
-     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+     <!-- MAIN CSS -->
+     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
 
-     <!-- Libraries Stylesheet -->
-     <link href="{{asset('lib/owlcarousel/assets/owl.carousel.min.css')}}" rel="stylesheet">
-
-     <!-- Customized Bootstrap Stylesheet -->
-     <link href="{{asset('css_1/style.css')}}" rel="stylesheet">
 </head>
+<body id="top" data-spy="scroll" data-target=".navbar-collapse" data-offset="50">
 
-<body>
-   <!-- Topbar Start -->
-   <div class="container-fluid" style="position: fixed; z-index: 1000; background-color:rgb(255, 250, 250)">
-    <form action="{{route('show_product_index')}}" method="GET">
-    <div class="row align-items-center py-3 px-xl-5" style="display: flex; justify-content:space-between">
-        <div class="col-lg-4.5 d-none d-lg-block">
-            <a href="{{route('client_index')}}" class="text-decoration-none">
-                <h1 class="m-0 display-5 font-weight-semi-bold"><span style=" background-color:rgb(255, 255, 255);"  class="text-primary font-weight-bold border px-3 mr-1">Shop</span>Đồ Gia Dụng</h1>
-            </a>
-        </div>
-        <div class="col-lg-4 text-left">
-                <!-- <div class="input-group">
-                    <input type="text" name="findProductByName" class="form-control" placeholder="Tìm Kiếm Sản Phẩm">
-                        <div class="input-group-append" style="background-color:rgb(255, 255, 255);">
-                            <span class="input-group-text bg-transparent text-primary">
-                                <button style="border:0; height:24px; background-color:rgb(255, 255, 255);" type="submit"><i class="fa fa-search"></i></button>
-                            </span>
-                        </div>
-                </div> -->
-        </div>
-        <div class="col-lg-1.5 text-left">
-            <?php
-                if (Auth::check())
-                {
-            ?>
-            <a href="{{route('infor_index')}}" class="nav-item nav-link">{{Auth::user()->name}}</a>
-            <?php
-                }
-            ?>
-        </div>
-        <div class="col-lg-1.5 text-left">
-            <?php
-                if (auth()->user())
-                {
-            ?>
-                <a href="{{route('logout')}}" class="nav-item nav-link">Đăng Xuất</a>
-            <?php
-                } else {
-            ?>
-                <a href="{{route('login_page')}}" class="nav-item nav-link">Đăng Nhập</a>
-            <?php
-                }
-            ?>
-        </div>
-        <div class="col-lg-1 text-right">
-            <a  style=" background-color:rgb(255, 255, 255);" @if (Auth::check())
-                    href={{route('show_cart')}}
-                @else
-                    onclick="alertCart()"
-                @endif
-            class="btn border" >
-                <i class="fas fa-shopping-cart text-primary"></i>
-                <span class="badge">
-                    {{$count}}
-                </span>
-            </a>
-        </div>
-    </div>
-</div>
-<!-- Topbar End -->
+     <!-- PRE LOADER -->
+     <section class="preloader">
+          <div class="spinner">
+
+               <span class="spinner-rotate"></span>
+
+          </div>
+     </section>
 
 
-    <!-- Navbar Start -->
-    <div class="container-fluid"  style="padding-top: 80px">
-        <div class="row border-top px-xl-5">
-            <div class="col-lg-3 d-none d-lg-block">
-                <a class="btn shadow-none d-flex align-items-center justify-content-between bg-primary text-white w-100" data-toggle="collapse" href="#navbar-vertical" style="height: 65px; margin-top: -1px; padding: 0 30px;">
-                    <h6 class="m-0">Danh Mục</h6>
-                    <i class="fa fa-angle-down text-dark"></i>
-                </a>
-                <nav class="collapse position-absolute navbar navbar-vertical navbar-light align-items-start p-0 border border-top-0 border-bottom-0 bg-light" id="navbar-vertical" style="width: calc(100% - 30px); z-index: 1;">
-                    <div class="navbar-nav w-100 overflow-hidden" style="height: 410px">
-                        <button style="background-color:rgb(255, 219, 219); border-top: 0; border-right:0; border-left:0; border-bottom: 1px rgb(193, 122, 122) solid " type="submit" name="seachByCategory" value="" class="nav-item nav-link">Tất Cả Danh Mục</button>
-                        @foreach ($categories as $category)
-                        <button style="border: 0; background-color:rgb(254, 223, 223)" type="submit" name="seachByCategory" value="{{$category->id}}" class="nav-item nav-link">{{$category->name}}</button>
-                        @endforeach
+     <!-- MENU -->
+     <section class="navbar custom-navbar navbar-fixed-top" role="navigation">
+          <div class="container">
+
+               <div class="navbar-header">
+                    <button class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                         <span class="icon icon-bar"></span>
+                         <span class="icon icon-bar"></span>
+                         <span class="icon icon-bar"></span>
+                    </button>
+
+                    <!-- lOGO TEXT HERE -->
+                    <a href="#" class="navbar-brand">Car Rental Website</a>
+               </div>
+
+               <!-- MENU LINKS -->
+               <div class="collapse navbar-collapse">
+                <ul class="nav navbar-nav navbar-nav-first">
+                     <li><a href="{{route('client_index')}}">Home</a></li>
+                     <li><a href="{{route('fleet')}}">Fleet</a></li>
+                     <li><a href="{{route('show_product_index')}}">Offers</a></li>
+                     <li class="dropdown">
+                          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About<span class="caret"></span></a>
+
+                          <ul class="dropdown-menu">
+                            <li><a href="{{route('blog')}}">Blog</a></li>
+                            <li><a href="{{route('aboutUs')}}">About Us</a></li>
+                            <li><a href="{{route('team')}}">Team</a></li>
+                            <li><a href="{{route('testimonials')}}">Testimonials</a></li>
+                            <li><a href="{{route('terms')}}">Terms</a></li>
+                       </ul>
+                     </li>
+                     <li class="active"><a href="{{route('client_contact')}}">Contact Us</a></li>
+                     <li><a href="login.html">Login</a></li>
+                </ul>
+           </div>
+
+          </div>
+     </section>
+
+     <section>
+          <div class="container">
+               <div class="text-center">
+                    <h1>Contact Us</h1>
+
+                    <br>
+
+                    <p class="lead">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illo, alias.</p>
+               </div>
+          </div>
+     </section>
+
+
+     <!-- CONTACT -->
+     <section id="contact">
+          <div class="container">
+               <div class="row">
+
+                    <div class="col-md-6 col-sm-12">
+                         <form id="contact-form" role="form" action="" method="post">
+                              <div class="col-md-12 col-sm-12">
+                                   <input type="text" class="form-control" placeholder="Enter full name" name="name" required>
+
+                                   <input type="email" class="form-control" placeholder="Enter email address" name="email" required>
+
+                                   <textarea class="form-control" rows="6" placeholder="Tell us about your message" name="message" required></textarea>
+                              </div>
+
+                              <div class="col-md-4 col-sm-12">
+                                   <input type="submit" class="form-control" name="send message" value="Send Message">
+                              </div>
+
+                         </form>
                     </div>
-            </nav>
-        </div>
-        <div class="col-lg-9">
-            <nav class="navbar navbar-expand-lg bg-light navbar-light py-3 py-lg-0 px-0">
-                <a href="" class="text-decoration-none d-block d-lg-none">
-                    <h1 class="m-0 display-5 font-weight-semi-bold"><span class="text-primary font-weight-bold border px-3 mr-1">T</span>Shop Bán VNDồ Gia Dụng</h1>
-                </a>
-                <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
-                    <div class="navbar-nav mr-auto py-0">
-                        <a href="{{route('client_index')}}" class="nav-item nav-link ">Trang Chủ</a>
-                        <a href="{{route('show_product_index')}}" class="nav-item nav-link">Mua Sắm</a>
-                        <a href="{{route('client_contact')}}" class="nav-item nav-link active">Liên Hệ</a>
-                        <a
-                            @if (Auth::check())
-                                href="{{route('infor_order')}}"
-                                class="nav-item nav-link">Lịch Sử Mua Hàng</a>
-                            @endif
+
+                    <div class="col-md-6 col-sm-12">
+                         <div class="contact-image">
+                              <img src="images/contact-1-600x400.jpg" class="img-responsive" alt="">
+                         </div>
                     </div>
-                </div>
-            </nav>
-        </div>
-    </div>
-    <!-- Navbar End -->
+
+               </div>
+          </div>
+     </section>
 
 
-    <!-- Page Header Start -->
-    <div class="container-fluid bg-secondary mb-5">
-        <div class="d-flex flex-column align-items-center justify-content-center" style="min-height: 300px">
-            <h1 class="font-weight-semi-bold text-uppercase mb-3">Liên Hệ</h1>
-            <div class="d-inline-flex">
-                <p class="m-0"><a href="{{route('client_index')}}">---Trang Chủ---</a></p>
-            </div>
-        </div>
-    </div>
-    <!-- Page Header End -->
+     <!-- FOOTER -->
+     <footer id="footer">
+          <div class="container">
+               <div class="row">
 
+                    <div class="col-md-4 col-sm-6">
+                         <div class="footer-info">
+                              <div class="section-title">
+                                   <h2>Headquarter</h2>
+                              </div>
+                              <address>
+                                   <p>212 Barrington Court <br>New York, ABC 10001</p>
+                              </address>
 
+                              <ul class="social-icon">
+                                   <li><a href="#" class="fa fa-facebook-square" attr="facebook icon"></a></li>
+                                   <li><a href="#" class="fa fa-twitter"></a></li>
+                                   <li><a href="#" class="fa fa-instagram"></a></li>
+                              </ul>
 
-    <!-- Contact Start -->
-    <div class="container-fluid pt-5">
-        <div class="text-center mb-4">
-            <h2 class="section-title px-5"><span class="px-2">Liên hệ với tôi bằng những hình thức sau</span></h2>
-        </div>
-        <div class="row px-xl-5">
-            <div class="col-lg-7 mb-5">
-                <div class="contact-form">
-                    <div id="success"></div>
-                    <form name="sentMessage" id="contactForm" novalidate="novalidate">
-                        <div class="control-group">
-                            <p>Zalo : 0379821973</p>
-                        </div>
-                        <div class="control-group">
-                            <p>Email : thodongoc2001@gmail.com</p>
-                        </div>
-                        <div class="control-group">
-                            <p>Facebook : <a href="https://www.facebook.com/profile.php?id=100009337852694">Đỗ Ngọc Thọ</a></p>
-                        </div>
-                        <div class="control-group">
-                            <p>Youtube : <a href="https://www.youtube.com/channel/UCXhYmR8GQY6EiCJStgRmJlw">Đỗ Ngọc Thọ</a></p>
-                        </div>
-                        <div class="control-group">
-                            <p>Github : <a href="https://github.com/dongoctho">Ấn vào đây để liên hệ với tôi !</a></p>
-                        </div>
-                    </form>
-                </div>
-            </div>
-            <div class="col-lg-5 mb-5">
-                <p>Sau hơn 10 năm hoạt động, bằng những nỗ lực không mệt mỏi, trung thành với chính sách “tận tâm phục vụ khách hàng”,
-                    Shop đồ gia dụng đã trở thành chuỗi bán lẻ hàng công nghệ hàng đầu, Shop đồ gia dụng trở thành chuỗi nhà thuốc số 1 về thuốc kê toa tại Việt Nam,
-                    Shop đồ gia dụng cũng ghi dấu ấn là nhà bán lẻ chính hãng hàng đầu với đầy đủ các chuẩn cửa hàng từ cấp độ cao cấp nhất. Shop đồ gia dụng đã,
-                    đang và sẽ tiếp tục chuyển đổi số một cách mạnh mẽ để nâng cao trải nghiệm khách hàng.</p>
-            </div>
-        </div>
-    </div>
-    <!-- Contact End -->
-
-
-    <!-- Footer Start -->
-    <div class="container-fluid bg-secondary text-dark mt-5 pt-5">
-        <div class="row px-xl-5 pt-5">
-            <div class="col-lg-4 col-md-12 mb-5 pr-3 pr-xl-5">
-                <a href="{{route('client_index')}}" class="text-decoration-none">
-                    <h1 class="mb-4 display-5 font-weight-semi-bold"><span class="text-primary font-weight-bold border border-white px-3 mr-1">Shop</span>Đồ Gia Dụng</h1>
-                </a>
-                <p>Sau hơn 10 năm hoạt động, bằng những nỗ lực không mệt mỏi, trung thành với chính sách “tận tâm phục vụ khách hàng”,
-                    Shop đồ gia dụng đã trở thành chuỗi bán lẻ hàng công nghệ hàng đầu, Shop đồ gia dụng trở thành chuỗi nhà thuốc số 1 về thuốc kê toa tại Việt Nam,
-                    Shop đồ gia dụng cũng ghi dấu ấn là nhà bán lẻ chính hãng hàng đầu với đầy đủ các chuẩn cửa hàng từ cấp độ cao cấp nhất. Shop đồ gia dụng đã,
-                    đang và sẽ tiếp tục chuyển đổi số một cách mạnh mẽ để nâng cao trải nghiệm khách hàng.</p>
-            </div>
-            <div class="col-lg-8 col-md-12">
-                <div class="row">
-                    <div class="col-md-4 mb-5">
-                        <h5 class="font-weight-bold text-dark mb-4">Truy Cập Nhanh</h5>
-                        <div class="d-flex flex-column justify-content-start">
-                            <a class="text-dark" href="{{route('client_index')}}"><i class="fa fa-angle-right mr-2"></i>Trang Chủ</a>
-                            <a class="text-dark" href="{{route('client_contact')}}"><i class="fa fa-angle-right mr-2"></i>Liên Hệ</a>
-                        </div>
+                              <div class="copyright-text">
+                                   <p>Copyright &copy; 2020 Company Name</p>
+                                   <p>Template by: <a href="https://www.phpjabbers.com/">PHPJabbers.com</a></p>
+                              </div>
+                         </div>
                     </div>
-                    <div class="col-md-4 mb-5">
-                        <h5 class="font-weight-bold text-dark mb-4">Truy Cập Nhanh</h5>
-                        <div class="d-flex flex-column justify-content-start">
-                            <a class="text-dark" href="{{route('show_product_index')}}"><i class="fa fa-angle-right mr-2"></i>Mua Sắm</a>
-                            <a class="text-dark"
-                                @if (Auth::check())
-                                href={{route('show_cart')}}
-                                @else
-                                    onclick="alertCart()"
-                                @endif><i class="fa fa-angle-right mr-2"></i>Giỏ Hàng</a>
-                        </div>
+
+                    <div class="col-md-4 col-sm-6">
+                         <div class="footer-info">
+                              <div class="section-title">
+                                   <h2>Contact Info</h2>
+                              </div>
+                              <address>
+                                   <p>+1 333 4040 5566</p>
+                                   <p><a href="mailto:contact@company.com">contact@company.com</a></p>
+                              </address>
+
+                              <div class="footer_menu">
+                                   <h2>Quick Links</h2>
+                                   <ul>
+                                        <li><a href="index.html">Home</a></li>
+                                        <li><a href="about-us.html">About Us</a></li>
+                                        <li><a href="terms.html">Terms & Conditions</a></li>
+                                        <li><a href="contact.html">Contact Us</a></li>
+                                   </ul>
+                              </div>
+                         </div>
                     </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Footer End -->
+
+                    <div class="col-md-4 col-sm-12">
+                         <div class="footer-info newsletter-form">
+                              <div class="section-title">
+                                   <h2>Newsletter Signup</h2>
+                              </div>
+                              <div>
+                                   <div class="form-group">
+                                        <form action="#" method="get">
+                                             <input type="email" class="form-control" placeholder="Enter your email" name="email" id="email" required>
+                                             <input type="submit" class="form-control" name="submit" id="form-submit" value="Send me">
+                                        </form>
+                                        <span><sup>*</sup> Please note - we do not spam your email.</span>
+                                   </div>
+                              </div>
+                         </div>
+                    </div>
+
+               </div>
+          </div>
+     </footer>
 
 
-    <!-- Back to Top -->
-    <a href="#" class="btn btn-primary back-to-top"><i class="fa fa-angle-double-up"></i></a>
+     <!-- SCRIPTS -->
+     <script src="{{ asset('js/jquery.js') }}"></script>
+     <script src="{{ asset('js/bootstrap.min.js') }}"></script>
+     <script src="{{ asset('js/owl.carousel.min.js') }}"></script>
+     <script src="{{ asset('js/smoothscroll.js') }}"></script>
+     <script src="{{ asset('js/custom.js') }}"></script>
 
-
-    <!-- JavaScript Libraries -->
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
-    <script src="{{asset('lib/easing/easing.min.js')}}"></script>
-    <script src="{{asset('lib/owlcarousel/owl.carousel.min.js')}}"></script>
-
-    <!-- Contact Javascript File -->
-    <script src="{{asset('mail/jqBootstrapValidation.min.js')}}"></script>
-    <script src="{{asset('mail/contact.js')}}"></script>
-
-    <!-- Template Javascript -->
-    <script src="{{asset('js/main.js')}}"></script>
-
-    <script>
-        function alertCart(){
-            swal({
-            title: "Bạn muốn thực hiện hành động này?",
-            text: "Hãy đăng nhập để thực hiện!",
-            icon: "warning",
-            buttons: true,
-            dangerMode: true,
-            })
-            .then((willDelete) => {
-            if (willDelete) {
-                window.location.href = "{{route('login_page')}}";
-            } else {
-                swal("Thao tác thất bại!");
-            }
-            });
-        }
-    </script>
 </body>
-
 </html>

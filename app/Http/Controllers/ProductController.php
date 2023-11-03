@@ -52,29 +52,30 @@ class ProductController extends Controller
     // show index client product
     public function indexProduct(Request $request)
     {
-        $oldSearch = "";
         $products = $this->productRepository->getProduct();
         foreach ($products as $product) {
             $data[] = $product->name;
         }
-        $dataSearch = [
-            'seachByPrice' => $request->seachByPrice,
-            'seachByCategory' => $request->seachByCategory,
-            'findProductByName' => $request->findProductByName
-        ];
-        if (isset($request->findProductByName)) {
-            $oldSearch = $request->findProductByName;
-        }
         $user = auth()->user();
-        $condition = $request->seachByPrice;
-        $products = $this->productRepository->getByCondition($dataSearch);
+        $column = [
+            'storages.quantity',
+            'products.id as id',
+            'products.description',
+            'products.name',
+            'products.price',
+            'products.image',
+            'storages.product_id',
+            'storages.created_at'
+        ];
+        $products = $this->productRepository->getByCondition("", $column);
+        $new_products = $this->productRepository->getNewProduct($column);
+
         $count = 0;
 
         if ( isset($user) ) {
             $count = $this->cartRepository->countProductInCart($user->id);
         }
-
-        return view('client.product', compact('user', 'count', 'products', 'condition', 'data', 'oldSearch'));
+        return view('client.product', compact('user', 'count', 'products', 'data', 'new_products'));
     }
 
     // show product detail client

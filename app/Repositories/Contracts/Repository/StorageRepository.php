@@ -50,7 +50,7 @@ class StorageRepository extends BaseRepository implements StorageRepositoryInter
         ->first();
     }
 
-    public function getProductSale($condition, array $column = ['*'])
+    public function getProductSale(array $column = ['*'])
     {
         $query = $this->model->newQuery();
         $query->select($column)->where('storages.deleted_at', '=', null)
@@ -58,37 +58,8 @@ class StorageRepository extends BaseRepository implements StorageRepositoryInter
                                ->where('products.sale', '>', 0)
                                ->where('storages.quantity', '>', '0')
                                ->orderByDesc('sale')
-                               ->limit(8);
+                               ->limit(3);
 
-        if (isset($condition['seachByPrice'])) {
-            if ($condition['seachByPrice'] == 1) {
-                $query->where('price', '<=', 50000);
-            }
-            if ($condition['seachByPrice'] == 2) {
-                $query->where('price', '>', 50000)
-                      ->where('price', '<=', 200000);
-            }
-            if ($condition['seachByPrice'] == 3) {
-                $query->where('price', '>', 200000)
-                      ->where('price', '<=', 500000);
-            }
-            if ($condition['seachByPrice'] == 4) {
-                $query->where('price', '>', 500000)
-                      ->where('price', '<=', 2000000);
-            }
-            if ($condition['seachByPrice'] == 5) {
-                $query->where('price', '>', 2000000);
-            }
-        }
-
-        if (isset($condition['seachByCategory'])) {
-            $query->where('category_id', '=', $condition['seachByCategory']);
-        }
-
-        if (isset($condition['findProductByName'])) {
-            $query->where('name', 'like', '%'.$condition['findProductByName'].'%')
-            ->get();
-        }
         return $query->get();
     }
 

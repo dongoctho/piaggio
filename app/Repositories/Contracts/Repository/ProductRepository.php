@@ -13,6 +13,18 @@ class ProductRepository extends BaseRepository implements ProductRepositoryInter
         return Product::class;
     }
 
+    public function getNewProduct(array $column = ['*'])
+    {
+        $query = $this->model->newQuery();
+        $query->select($column)->where('products.deleted_at', '=', null)
+                                ->join('storages', 'products.id', '=', 'storages.product_id')
+                               ->where('storages.quantity', '>', '0')
+                               ->orderByDesc('products.created_at')
+                               ->limit(3);
+
+        return $query->get();
+    }
+
     public function countProduct()
     {
         $query = $this->model->newQuery();

@@ -43,6 +43,41 @@ class IndexController extends Controller
         $this->image_service = $imageService;
     }
 
+    public function fleet()
+    {
+        return view('client.fleet');
+    }
+
+    public function blog()
+    {
+        return view('client.blog-posts');
+    }
+
+    public function blogDetail()
+    {
+        return view('client.blog-post-details');
+    }
+
+    public function aboutUs()
+    {
+        return view('client.about-us');
+    }
+
+    public function team()
+    {
+        return view('client.team');
+    }
+
+    public function testimonials()
+    {
+        return view('client.testimonials');
+    }
+
+    public function terms()
+    {
+        return view('client.terms');
+    }
+
     // show information user page
     public function information()
     {
@@ -97,29 +132,18 @@ class IndexController extends Controller
     }
 
     // show  index client
-    public function indexClient(Request $request)
+    public function indexClient()
     {
         $oldSearch = "";
-        $products = $this->productRepository->getProduct();
-        foreach ($products as $product) {
-            $data[] = $product->name;
-        }
-        $dataSearch = [
-            'seachByCategory' => $request->seachByCategory,
-            'findProductByName' => $request->findProductByName
-        ];
-        if (isset($request->findProductByName)) {
-            $oldSearch = $request->findProductByName;
-        }
+        $products = $this->storageRepository->getProductSale();
         $user = auth()->user();
         $count = 0;
-        $products = $this->storageRepository->getProductSale($dataSearch);
 
         if ( isset($user) ) {
             $count = $this->cartRepository->countProductInCart($user->id);
         }
 
-        return view('client.index', compact('products', 'user', 'count', 'oldSearch', 'data'));
+        return view('client.index', compact('products', 'user', 'count'));
     }
 
     // show index contact

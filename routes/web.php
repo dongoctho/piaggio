@@ -49,6 +49,13 @@ Route::get('/checkout/infor/detail/{id_user}/order/{id}',[OrderController::class
 Route::get('/checkout/infor/deleted/{id}',[OrderController::class, 'deleted'])->name('deleted_order');
 Route::get('/checkout/infor/reorder/{id}',[OrderController::class, 'reOrder'])->name('re_order');
 Route::get('/contact',[IndexController::class, 'indexContact'])->name('client_contact');
+Route::get('/fleet',[IndexController::class, 'fleet'])->name('fleet');
+Route::get('/blog',[IndexController::class, 'blog'])->name('blog');
+Route::get('/blog-post-details',[IndexController::class, 'blogDetail'])->name('blog_detail');
+Route::get('/aboutUs',[IndexController::class, 'aboutUs'])->name('aboutUs');
+Route::get('/team',[IndexController::class, 'team'])->name('team');
+Route::get('/testimonials',[IndexController::class, 'testimonials'])->name('testimonials');
+Route::get('/terms',[IndexController::class, 'terms'])->name('terms');
 Route::get('/productDetail/{id}',[ProductController::class, 'productDetail'])->name('product_detail');
 Route::post('/productDetail/{id}',[CartController::class, 'addCart'])->name('cart_detail');
 Route::get('/cartDetail',[CartController::class, 'showCart'])->name('show_cart');
@@ -58,6 +65,9 @@ Route::get('/product',[ProductController::class, 'indexProduct'])->name('show_pr
 Route::get('/information',[IndexController::class, 'information'])->name('infor_index');
 Route::get('/information/edit',[IndexController::class, 'editInformation'])->name('infor_index_edit');
 Route::post('/information/edit',[IndexController::class, 'editInfor']);
+Route::get('/information/change_password',[AuthController::class, 'changePassClient'])->name('change_pass_client');
+Route::post('/information/change_password',[AuthController::class, 'changePassClientConfirm']);
+route::get('/checkout/infor/exportPDF/{id}',[OrderController::class, 'exportPDF'])->name('export_pdf');
 
 //admin
 Route::prefix('admin')->middleware('CheckLogin')->group(function(){
