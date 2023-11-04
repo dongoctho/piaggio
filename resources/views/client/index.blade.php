@@ -63,7 +63,7 @@
                               </ul>
                          </li>
                          <li><a href="{{route('client_contact')}}">Contact Us</a></li>
-                         <li><a href="login.html">Login</a></li>
+                         <li><a href="{{route('login_page')}}">Login</a></li>
                     </ul>
                </div>
 
