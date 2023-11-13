@@ -28,7 +28,7 @@
 </html>
 
 <script defer>
-    const stripe = Stripe("pk_test_51NiXlJIW7Pk2GqcqnmjBULIlx8BBotFQrQWhJMrVLY7vmyiMaaHeC42U7dgdk7YouUCF7RHRRpwMiexNo9NqdIv200uu7HslGA");
+    const stripe = Stripe("pk_test_51OBhJLEHdzZvjajCbwuslLJYkbqRlP4eS3DfKQdXvDIVjf1If9KEgoKcuMFRhwnyhKK9FuZJ7AbPe3GmunXoCpBu00Hsu34j1P");
 
     // The items the customer wants to buy
     const items = [{ id: "xl-tshirt" }];

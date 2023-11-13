@@ -1,450 +1,675 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html class="no-js" lang="en">
+
 <head>
+	<!-- meta data -->
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
-     <title>piaggio</title>
+	<!--font-family-->
+	<link
+		href="https://fonts.googleapis.com/css?family=Poppins:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i"
+		rel="stylesheet">
 
-     <meta charset="UTF-8">
-     <meta http-equiv="X-UA-Compatible" content="IE=Edge">
-     <meta name="description" content="">
-     <meta name="keywords" content="">
-     <meta name="author" content="">
-     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<link href="https://fonts.googleapis.com/css?family=Rufina:400,700" rel="stylesheet">
 
-     <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}">
-     <link rel="stylesheet" href="{{ asset('css/font-awesome.min.css') }}">
-     <link rel="stylesheet" href="{{ asset('css/owl.carousel.css') }}">
-     <link rel="stylesheet" href="{{ asset('css/owl.theme.default.min.css') }}">
+	<!-- title of site -->
+	<title>CarVilla</title>
 
-     <!-- MAIN CSS -->
-     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+	<!-- For favicon png -->
+	<link rel="shortcut icon" type="image/icon" href="{{ asset('assetsPiaggio/logo/favicon.png') }}" />
+
+	<!--font-awesome.min.css-->
+	<link rel="stylesheet" href="{{ asset('assetsPiaggio/css/font-awesome.min.css') }}">
+
+	<!--linear icon css-->
+	<link rel="stylesheet" href="{{ asset('assetsPiaggio/css/linearicons.css') }}">
+
+	<!--flaticon.css-->
+	<link rel="stylesheet" href="{{ asset('assetsPiaggio/css/flaticon.css') }}">
+
+	<!--animate.css-->
+	<link rel="stylesheet" href="{{ asset('assetsPiaggio/css/animate.css') }}">
+
+	<!--owl.carousel.css-->
+	<link rel="stylesheet" href="{{ asset('assetsPiaggio/css/owl.carousel.min.css') }}">
+	<link rel="stylesheet" href="{{ asset('assetsPiaggio/css/owl.theme.default.min.css') }}">
+
+	<!--bootstrap.min.css-->
+	<link rel="stylesheet" href="{{ asset('assetsPiaggio/css/bootstrap.min.css') }}">
+
+	<!-- bootsnav -->
+	<link rel="stylesheet" href="{{ asset('assetsPiaggio/css/bootsnav.css') }}">
+
+	<!--style.css-->
+	<link rel="stylesheet" href="{{ asset('assetsPiaggio/css/style.css') }}">
+
+	<!--responsive.css-->
+	<link rel="stylesheet" href="{{ asset('assetsPiaggio/css/responsive.css') }}">
+
+	<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+
+	<!--[if lt IE 9]>
+			<script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+			<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+        <![endif]-->
 
 </head>
-<body id="top" data-spy="scroll" data-target=".navbar-collapse" data-offset="50">
 
-     <!-- PRE LOADER -->
-     <section class="preloader">
-          <div class="spinner">
-               <span class="spinner-rotate"></span>
-          </div>
-     </section>
+<body>
+	<!--[if lte IE 9]>
+            <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
+        <![endif]-->
+
+	<!--welcome-hero start -->
+	<section id="home" class="welcome-hero">
+
+		<!-- top-area Start -->
+		<div class="top-area">
+			<div class="header-area">
+				<!-- Start Navigation -->
+				<nav class="navbar navbar-default bootsnav  navbar-sticky navbar-scrollspy"
+					data-minus-value-desktop="70" data-minus-value-mobile="55" data-speed="1000">
+
+					<div class="container">
+
+						<!-- Start Header Navigation -->
+						<div class="navbar-header">
+							<button type="button" class="navbar-toggle" data-toggle="collapse"
+								data-target="#navbar-menu">
+								<i class="fa fa-bars"></i>
+							</button>
+							<a class="navbar-brand" href="index.html">piaggio<span></span></a>
+
+						</div><!--/.navbar-header-->
+						<!-- End Header Navigation -->
+
+						<!-- Collect the nav links, forms, and other content for toggling -->
+						<div class="collapse navbar-collapse menu-ui-design" id="navbar-menu">
+							<ul class="nav navbar-nav navbar-right" data-in="fadeInDown" data-out="fadeOutUp">
+								<li class=" scroll active"><a href="#home">Trang chủ</a></li>
+								<li class=""><a href="{{route('show_product_index')}}">Sản phẩm</a></li>
+								<!-- <li class="scroll"><a href="#service">Dịch vụ</a></li> -->
+								<li class="scroll"><a href="#featured-cars">Xe nổi bật</a></li>
+								<li class="scroll"><a href="#new-cars">Xe mới</a></li>
+								<li class="scroll"><a href="#brand">Nhà tài trợ</a></li>
+								<li class="scroll"><a href="#contact">Liên hệ</a></li>
+
+								<li class="">
+                                    <a
+                                    @if (Auth::check())
+                                    href={{route('show_cart')}}
+                                    @else
+                                        onclick="alertCart()"
+                                    @endif
+                                    >
+                                    Giỏ hàng
+                                    </a>
+
+                                </li>
+                                @if (Auth::check())
+								<li class="">
+                                    <a href="{{route('infor_order')}}" class="nav-item nav-link">Lịch Sử Mua Hàng</a>
+                                </li>
+                                @endif
+                                <li class="">
+                                    <?php
+                                        if (auth()->user())
+                                        {
+                                    ?>
+                                        <a href="{{route('logout')}}" class="nav-item nav-link">Đăng Xuất</a>
+                                    <?php
+                                        } else {
+                                    ?>
+                                        <a href="{{route('login_page')}}" class="nav-item nav-link">Đăng Nhập</a>
+                                    <?php
+                                        }
+                                    ?>
+                                </li>
+
+							</ul><!--/.nav -->
+						</div><!-- /.navbar-collapse -->
+					</div><!--/.container-->
+				</nav><!--/nav-->
+				<!-- End Navigation -->
+			</div><!--/.header-area-->
+			<div class="clearfix"></div>
+
+		</div><!-- /.top-area-->
+		<!-- top-area End -->
+
+		<div class="container">
+			<div class="welcome-hero-txt">
+				<h2>NHẬN XE MONG MUỐN VỚI GIÁ HỢP LÝ</h2>
+				<p>
+					Đây là trang chủ web Piaggio
+				</p>
+				<button class="welcome-btn" onclick="window.location.href='#'">Test</button>
+			</div>
+		</div>
+
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12">
+					<div class="model-search-content">
+						<div class="row">
+							<div class="col-md-offset-1 col-md-2 col-sm-12">
+								<div class="single-model-search">
+									<h2>chọn năm</h2>
+									<div class="model-select-icon">
+										<select class="form-control">
+
+											<option value="default">năm</option><!-- /.option-->
+											<option value="2020">2020</option><!-- /.option-->
+											<option value="2021">2021</option><!-- /.option-->
+											<option value="2022">2022</option><!-- /.option-->
+											<option value="2023">2023</option><!-- /.option-->
+
+										</select><!-- /.select-->
+									</div><!-- /.model-select-icon -->
+								</div>
+								<div class="single-model-search">
+									<h2>Kiểu dáng</h2>
+									<div class="model-select-icon">
+										<select class="form-control">
+
+											<option value="default">style</option><!-- /.option-->
+
+											<option value="sedan">Thể thao</option><!-- /.option-->
+
+											<option value="van">Đường phố</option><!-- /.option-->
+											<option value="roadster">Đường trường</option><!-- /.option-->
+
+										</select><!-- /.select-->
+									</div><!-- /.model-select-icon -->
+								</div>
+							</div>
+							<div class="col-md-offset-1 col-md-2 col-sm-12">
+								<div class="single-model-search">
+									<h2>Hãng xe</h2>
+									<div class="model-select-icon">
+										<select class="form-control">
+
+											<option value="default">Chọn</option><!-- /.option-->
+
+											<option value="toyota">piaggio</option><!-- /.option-->
+
+										</select><!-- /.select-->
+									</div><!-- /.model-select-icon -->
+								</div>
+								<div class="single-model-search">
+									<h2>Tình trạng xe</h2>
+									<div class="model-select-icon">
+										<select class="form-control">
+
+											<option value="default">Tình trạng</option><!-- /.option-->
+
+											<option value="something">something</option><!-- /.option-->
+
+											<option value="something">something</option><!-- /.option-->
+											<option value="something">something</option><!-- /.option-->
+
+										</select><!-- /.select-->
+									</div><!-- /.model-select-icon -->
+								</div>
+							</div>
+							<div class="col-md-offset-1 col-md-2 col-sm-12">
+								<div class="single-model-search">
+									<h2>Chọn mẫu xe</h2>
+									<div class="model-select-icon">
+										<select class="form-control">
+
+											<option value="default">mẫu</option><!-- /.option-->
+
+											<option value="kia-rio">kia-rio</option><!-- /.option-->
+
+											<option value="mitsubishi">mitsubishi</option><!-- /.option-->
+											<option value="ford">ford</option><!-- /.option-->
+
+										</select><!-- /.select-->
+									</div><!-- /.model-select-icon -->
+								</div>
+								<div class="single-model-search">
+									<h2>Chọn giá</h2>
+									<div class="model-select-icon">
+										<select class="form-control">
+
+											<option value="default">giá</option><!-- /.option-->
+
+											<option value="$0.00">$0.00</option><!-- /.option-->
+
+											<option value="$0.00">$0.00</option><!-- /.option-->
+											<option value="$0.00">$0.00</option><!-- /.option-->
+
+										</select><!-- /.select-->
+									</div><!-- /.model-select-icon -->
+								</div>
+							</div>
+							<div class="col-md-2 col-sm-12">
+								<div class="single-model-search text-center">
+									<button class="welcome-btn model-search-btn" onclick="window.location.href='#'">
+										search
+									</button>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</section><!--/.welcome-hero-->
+	<!--welcome-hero end -->
+
+	<!--service start -->
+	<section id="service" class="service">
+		<div class="container">
+			<div class="service-content">
+				<div class="row">
+					<div class="col-md-4 col-sm-6">
+						<div class="single-service-item">
+							<div class="single-service-icon">
+								<i class="flaticon-car"></i>
+							</div>
+							<h2><a href="#">Đại lý ô tô lớn nhất</a></h2>
+							<p>
+								Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut den fugit sed quia.
+							</p>
+						</div>
+					</div>
+					<div class="col-md-4 col-sm-6">
+						<div class="single-service-item">
+							<div class="single-service-icon">
+								<i class="flaticon-car-repair"></i>
+							</div>
+							<h2><a href="#">Sửa chữa không giới hạn</a></h2>
+							<p>
+								Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut den fugit sed quia.
+							</p>
+						</div>
+					</div>
+					<div class="col-md-4 col-sm-6">
+						<div class="single-service-item">
+							<div class="single-service-icon">
+								<i class="flaticon-car-1"></i>
+							</div>
+							<h2><a href="#">Hỗ trợ bảo hiểm</a></h2>
+							<p>
+								Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut den fugit sed quia.
+							</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div><!--/.container-->
+
+	</section><!--/.service-->
+	<!--service end-->
+
+	<!--new-cars start -->
+	<section id="new-cars" class="new-cars">
+		<div class="container">
+			<div class="section-header">
+				<p>Kiểm tra những chiếc xe mới nhất</p>
+				<h2>Xe mới nhất</h2>
+			</div><!--/.section-header-->
+			<div class="new-cars-content">
+				<div class="owl-carousel owl-theme" id="new-cars-carousel">
+                    @foreach ($products as $productses)
+                    <div class="new-cars-item">
+						<div class="single-new-cars-item">
+							<div class="row">
+								<div class="col-md-7 col-sm-12">
+									<div class="new-cars-img">
+										<a href="{{route('product_detail', ['id'=>$productses->id])}}"><img src="{{asset('uploads/'.$productses->image)}}" alt="img" /></a>
+									</div><!--/.new-cars-img-->
+								</div>
+								<div class="col-md-5 col-sm-12">
+									<div class="new-cars-txt">
+										<h2><a href="{{route('product_detail', ['id'=>$productses->id])}}">{{ $productses->name }}</a></h2>
+										<p>
+											{{ $productses->description }}
+										</p>
+										<p class="new-cars-para2">
+                                            @foreach ($categories as $category)
+                                                @if ($productses->category_id == $category->id)
+                                                    {{ $category->name }}
+                                                @endif
+                                            @endforeach
+										</p>
+										<button class="welcome-btn new-cars-btn" onclick="window.location.href='{{route('product_detail', ['id'=>$productses->id])}}'">
+											view details
+										</button>
+									</div><!--/.new-cars-txt-->
+								</div><!--/.col-->
+							</div><!--/.row-->
+						</div><!--/.single-new-cars-item-->
+					</div><!--/.new-cars-item-->
+                    @endforeach
 
 
-     <!-- MENU -->
-     <section class="navbar custom-navbar navbar-fixed-top" role="navigation">
-          <div class="container">
+				</div><!--/#new-cars-carousel-->
+			</div><!--/.new-cars-content-->
+		</div><!--/.container-->
 
-               <div class="navbar-header">
-                    <button class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                         <span class="icon icon-bar"></span>
-                         <span class="icon icon-bar"></span>
-                         <span class="icon icon-bar"></span>
-                    </button>
+	</section><!--/.new-cars-->
+	<!--new-cars end -->
 
-                    <!-- lOGO TEXT HERE -->
-                    <a href="#" class="navbar-brand">Car Rental Website</a>
-               </div>
+	<!--featured-cars start -->
+	<section id="featured-cars" class="featured-cars">
+		<div class="container">
+			<div class="section-header">
+				<p>Kiểm tra những chiếc xe nổi bật</p>
+				<h2>Xe nổi bật</h2>
+			</div><!--/.section-header-->
+			<div class="featured-cars-content">
+				<div class="row">
+                    @foreach ($productAll as $productAlls)
+                    <div class="col-lg-3 col-md-4 col-sm-6">
+						<div class="single-featured-cars">
+							<div class="featured-img-box">
+								<div class="featured-cars-img">
+									<a href="{{route('product_detail', ['id'=>$productAlls->id])}}"><img src="{{asset('uploads/'.$productAlls->image)}}" alt="cars"></a>
+								</div>
+								<div class="featured-model-info">
+									<p>
+										model: 2017
+										<span class="featured-mi-span"> 3100 mi</span>
+										<span class="featured-hp-span"> 240HP</span>
+										automatic
+									</p>
+								</div>
+							</div>
+							<div class="featured-cars-txt">
+								<h2><a href="{{route('product_detail', ['id'=>$productAlls->id])}}">{{$productAlls->name}}</a></h2>
+								@if ($productAlls->discount == 0)
+                                <h3>{{number_format($productAlls->price, 0, ",", ".")}} VND</h3>
+                                @elseif ($productAlls->product_type == 0)
+                                <h3>{{number_format($productAlls->price, 0, ",", ".")}} VND</h3>
+                                    <h3>{{number_format($productAlls->price * (1 - ($productAlls->discount / 100)), 0, ",", ".")}} VND</h3>
+                                @elseif ($productAlls->product_type == 1)
+                                    <h3>{{number_format($productAlls->price, 0, ",", ".")}}</h3>
+                                    <div class="">
+                                        <h3> {{number_format($productAlls->price - $productAlls->discount, 0, ",", ".")}}</h3>
+                                    </div>
+                                @endif
+								<p>
+									{{ $productAlls->description }}
+								</p>
+							</div>
+						</div>
+					</div>
+                    @endforeach
 
-               <!-- MENU LINKS -->
-               <div class="collapse navbar-collapse">
-                    <ul class="nav navbar-nav navbar-nav-first">
-                         <li class="active"><a href="{{route('client_index')}}">Home</a></li>
-                         <li><a href="{{route('fleet')}}">Fleet</a></li>
-                         <li><a href="{{route('show_product_index')}}">Offers</a></li>
-                         <li class="dropdown">
-                              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About<span class="caret"></span></a>
+				</div>
+			</div>
+		</div><!--/.container-->
 
-                              <ul class="dropdown-menu">
-                                   <li><a href="{{route('blog')}}">Blog</a></li>
-                                   <li><a href="{{route('aboutUs')}}">About Us</a></li>
-                                   <li><a href="{{route('team')}}">Team</a></li>
-                                   <li><a href="{{route('testimonials')}}">Testimonials</a></li>
-                                   <li><a href="{{route('terms')}}">Terms</a></li>
-                              </ul>
-                         </li>
-                         <li><a href="{{route('client_contact')}}">Contact Us</a></li>
-                         <li><a href="{{route('login_page')}}">Login</a></li>
-                    </ul>
-               </div>
+	</section><!--/.featured-cars-->
+	<!--featured-cars end -->
 
-          </div>
-     </section>
+	<!-- clients-say strat -->
+	<section id="clients-say" class="clients-say">
+		<div class="container">
+			<div class="section-header">
+				<h2>Khách hàng của chúng tôi nói gì</h2>
+			</div><!--/.section-header-->
+			<div class="row">
+				<div class="owl-carousel testimonial-carousel">
+					<div class="col-sm-3 col-xs-12">
+						<div class="single-testimonial-box">
+							<div class="testimonial-description">
+								<div class="testimonial-info">
+									<div class="testimonial-img">
+										<img src="assets/images/clients/c1.png" alt="image of clients person" />
+									</div><!--/.testimonial-img-->
+								</div><!--/.testimonial-info-->
+								<div class="testimonial-comment">
+									<p>
+										Sed ut pers unde omnis iste natus error sit voluptatem accusantium dolor laudan
+										rem aperiam, eaque ipsa quae ab illo inventore verit.
+									</p>
+								</div><!--/.testimonial-comment-->
+								<div class="testimonial-person">
+									<h2><a href="#">Nguyễn Đức Nghĩa</a></h2>
+									<h4>Hà Nam</h4>
+								</div><!--/.testimonial-person-->
+							</div><!--/.testimonial-description-->
+						</div><!--/.single-testimonial-box-->
+					</div><!--/.col-->
+					<div class="col-sm-3 col-xs-12">
+						<div class="single-testimonial-box">
+							<div class="testimonial-description">
+								<div class="testimonial-info">
+									<div class="testimonial-img">
+										<img src="assets/images/clients/c2.png" alt="image of clients person" />
+									</div><!--/.testimonial-img-->
+								</div><!--/.testimonial-info-->
+								<div class="testimonial-comment">
+									<p>
+										Sed ut pers unde omnis iste natus error sit voluptatem accusantium dolor laudan
+										rem aperiam, eaque ipsa quae ab illo inventore verit.
+									</p>
+								</div><!--/.testimonial-comment-->
+								<div class="testimonial-person">
+									<h2><a href="#">Nguyễn Đức Nghĩa</a></h2>
+									<h4>Hà Nam</h4>
+								</div><!--/.testimonial-person-->
+							</div><!--/.testimonial-description-->
+						</div><!--/.single-testimonial-box-->
+					</div><!--/.col-->
+					<div class="col-sm-3 col-xs-12">
+						<div class="single-testimonial-box">
+							<div class="testimonial-description">
+								<div class="testimonial-info">
+									<div class="testimonial-img">
+										<img src="assets/images/clients/c3.png" alt="image of clients person" />
+									</div><!--/.testimonial-img-->
+								</div><!--/.testimonial-info-->
+								<div class="testimonial-comment">
+									<p>
+										Sed ut pers unde omnis iste natus error sit voluptatem accusantium dolor laudan
+										rem aperiam, eaque ipsa quae ab illo inventore verit.
+									</p>
+								</div><!--/.testimonial-comment-->
+								<div class="testimonial-person">
+									<h2><a href="#">Nguyễn Đức Nghĩa</a></h2>
+									<h4>Hà Nam</h4>
+								</div><!--/.testimonial-person-->
+							</div><!--/.testimonial-description-->
+						</div><!--/.single-testimonial-box-->
+					</div><!--/.col-->
+				</div><!--/.testimonial-carousel-->
+			</div><!--/.row-->
+		</div><!--/.container-->
 
-     <!-- HOME -->
-     <section id="home">
-          <div class="row">
-               <div class="owl-carousel owl-theme home-slider">
-                    <div class="item item-first">
-                         <div class="caption">
-                              <div class="container">
-                                   <div class="col-md-6 col-sm-12">
-                                        <h1>Lorem ipsum dolor sit amet.</h1>
-                                        <h3>Voluptas dignissimos esse, explicabo cum fugit eaque, perspiciatis quia ab nisi sapiente delectus eiet.</h3>
-                                        <a href="fleet.html" class="section-btn btn btn-default">Fleet</a>
-                                   </div>
-                              </div>
-                         </div>
-                    </div>
+	</section><!--/.clients-say-->
+	<!-- clients-say end -->
 
-                    <div class="item item-second">
-                         <div class="caption">
-                              <div class="container">
-                                   <div class="col-md-6 col-sm-12">
-                                        <h1>Distinctio explicabo vero animi culpa facere voluptatem.</h1>
-                                        <h3>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nemo, excepturi.</h3>
-                                        <a href="fleet.html" class="section-btn btn btn-default">Fleet</a>
-                                   </div>
-                              </div>
-                         </div>
-                    </div>
+	<!--brand strat -->
+	<section id="brand" class="brand">
+		<div class="container">
+			<div class="brand-area">
+				<div class="owl-carousel owl-theme brand-item">
+					<div class="item">
+						<a href="#">
+							<img src="{{ asset('assetsPiaggio/images/brand/br1.png') }}" alt="brand-image'" />
+						</a>
+					</div><!--/.item-->
+					<div class="item">
+						<a href="#">
+							<img src="{{ asset('assetsPiaggio/images/brand/br2.png') }}" alt="brand-image'" />
+						</a>
+					</div><!--/.item-->
+					<div class="item">
+						<a href="#">
+							<img src="{{ asset('assetsPiaggio/images/brand/br3.png') }}" alt="brand-image'" />
+						</a>
+					</div><!--/.item-->
+					<div class="item">
+						<a href="#">
+							<img src="{{ asset('assetsPiaggio/images/brand/br4.png') }}" alt="brand-image'" />
+						</a>
+					</div><!--/.item-->
 
-                    <div class="item item-third">
-                         <div class="caption">
-                              <div class="container">
-                                   <div class="col-md-6 col-sm-12">
-                                        <h1>Efficient Learning Methods</h1>
-                                        <h3>Nam eget sapien vel nibh euismod vulputate in vel nibh. Quisque eu ex eu urna venenatis sollicitudin ut at libero.</h3>
-                                        <a href="fleet.html" class="section-btn btn btn-default">Fleet</a>
-                                   </div>
-                              </div>
-                         </div>
-                    </div>
-               </div>
-          </div>
-     </section>
+					<div class="item">
+						<a href="#">
+							<img src="{{ asset('assetsPiaggio/images/brand/br5.png') }}" alt="brand-image'" />
+						</a>
+					</div><!--/.item-->
 
-     <main>
-          <section>
-               <div class="container">
-                    <div class="row">
-                         <div class="col-md-12 col-sm-12">
-                              <div class="text-center">
-                                   <h2>About us</h2>
+					<div class="item">
+						<a href="#">
+							<img src="{{ asset('assetsPiaggio/images/brand/br6.png') }}" alt="brand-image'" />
+						</a>
+					</div><!--/.item-->
+				</div><!--/.owl-carousel-->
+			</div><!--/.clients-area-->
 
-                                   <br>
+		</div><!--/.container-->
 
-                                   <p class="lead">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore molestias ipsa veritatis nihil iusto maiores natus dolor, a reiciendis corporis obcaecati ex. Totam assumenda impedit aut eum, illum distinctio saepe explicabo. Consequuntur molestiae similique id quos, quasi quas perferendis laboriosam, fugit natus odit totam! Id dolores saepe, sint debitis rerum dolorem tempora aliquid, pariatur enim nisi. Quia ab iusto assumenda.</p>
-                              </div>
-                         </div>
-                    </div>
-               </div>
-          </section>
+	</section><!--/brand-->
+	<!--brand end -->
 
-          <section>
-               <div class="container">
-                    <div class="row">
-                         <div class="col-md-12 col-sm-12">
-                              <div class="section-title text-center">
-                                   <h2>Offers <small>Lorem ipsum dolor sit amet.</small></h2>
-                              </div>
-                         </div>
-                         @foreach ($products as $productses)
-                         <div class="col-md-4 col-sm-6">
-                            <div class="team-thumb">
-                                <div class="team-image">
-                                     <img src="{{asset('uploads/'.$productses->image)}}" class="img-responsive" alt="">
-                                </div>
-                                <div class="team-info">
-                                     <h3>{{$productses->name}}</h3>
+	<!--blog start -->
+	<section id="blog" class="blog"></section><!--/.blog-->
+	<!--blog end -->
 
-                                     <p class="lead"><small>{{number_format($productses->price)}} VND</small></p>
+	<!--contact start-->
+	<footer id="contact" class="contact">
+		<div class="container">
+			<div class="footer-top">
+				<div class="row">
+					<div class="col-md-3 col-sm-6">
+						<div class="single-footer-widget">
+							<div class="footer-logo">
+								<a href="index.html">Piaggio</a>
+							</div>
+							<p>
+								Nhưng lúc đó tôi rơi vào đau đớn và lao động nặng nề. Trong những năm qua, tôi sẽ đến.
+							</p>
+							<div class="footer-contact">
+								<p>nghia5141@gmail.com</p>
+								<p>+84 948766582</p>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-2 col-sm-6">
+						<div class="single-footer-widget">
+							<h2>Về web</h2>
+							<ul>
+								<li><a href="#">about us</a></li>
+								<li><a href="#">career</a></li>
+								<li><a href="#">terms <span> of service</span></a></li>
+								<li><a href="#">privacy policy</a></li>
+							</ul>
+						</div>
+					</div>
+					<div class="col-md-3 col-xs-12">
+						<div class="single-footer-widget">
+							<h2>Nhãn hiệu hàng đầu</h2>
+							<div class="row">
+								<div class="col-md-7 col-xs-6">
+									<ul>
+										<li><a href="#">Piaggio</a></li>
+										<li><a href="#">Piaggio</a></li>
+										<li><a href="#">Piaggio</a></li>
+										<li><a href="#">Piaggio</a></li>
+										<li><a href="#">Piaggio</a></li>
+										<li><a href="#">Piaggio</a></li>
+									</ul>
+								</div>
+								<div class="col-md-5 col-xs-6">
+									<ul>
+										<li><a href="#">Piaggio</a></li>
+										<li><a href="#">Piaggio</a></li>
+										<li><a href="#">Piaggio</a></li>
+										<li><a href="#">Piaggio</a></li>
+										<li><a href="#">Piaggio</a></li>
+										<li><a href="#">Piaggio</a></li>
+									</ul>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-offset-1 col-md-3 col-sm-6">
+						<div class="single-footer-widget">
+							<h2>Gửi phản hồi</h2>
+							<div class="footer-newsletter">
+								<p>
+									Đăng ký để cập nhật tin tức và thông tin mới nhất
+								</p>
+							</div>
+							<div class="hm-foot-email">
+								<div class="foot-email-box">
+									<input type="text" class="form-control" placeholder="Nhập Email">
+								</div><!--/.foot-email-box-->
+								<div class="foot-email-subscribe">
+									<span><i class="fa fa-arrow-right"></i></span>
+								</div><!--/.foot-email-icon-->
+							</div><!--/.hm-foot-email-->
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="footer-copyright">
+				<div class="row">
+					<div class="col-sm-6">
+						<p>
+							&copy; designed and developed by <a
+								href="#">Nguyen Duc Nghia</a>.
+						</p><!--/p-->
+					</div>
+					<div class="col-sm-6">
+						<div class="footer-social">
+							<a href="#"><i class="fa fa-facebook"></i></a>
+							<a href="#"><i class="fa fa-instagram"></i></a>
+							<a href="#"><i class="fa fa-linkedin"></i></a>
+							<a href="#"><i class="fa fa-pinterest-p"></i></a>
+							<a href="#"><i class="fa fa-behance"></i></a>
+						</div>
+					</div>
+				</div>
+			</div><!--/.footer-copyright-->
+		</div><!--/.container-->
 
-                                     <span>{{$productses->description}}</span>
-                                </div>
-                                <div class="team-thumb-actions">
-                                     <a href="{{route('product_detail', ['id'=>$productses->id])}}" class="section-btn btn btn-primary btn-block">View Offer</a>
-                                </div>
-                           </div>
-                         </div>
-                         @endforeach
-                    </div>
-               </div>
-          </section>
-          <section>
-               <div class="container">
-                    <div class="row">
-                         <div class="col-md-12 col-sm-12">
-                              <div class="section-title text-center">
-                                   <h2>Latest Blog posts <small>Lorem ipsum dolor sit amet.</small></h2>
-                              </div>
-                         </div>
+		<div id="scroll-Top">
+			<div class="return-to-top">
+				<i class="fa fa-angle-up " id="scroll-top" data-toggle="tooltip" data-placement="top" title=""
+					data-original-title="Back to Top" aria-hidden="true"></i>
+			</div>
 
-                         <div class="col-md-4 col-sm-4">
-                              <div class="courses-thumb courses-thumb-secondary">
-                                   <div class="courses-top">
-                                        <div class="courses-image">
-                                             <img src="images/blog-1-720x480.jpg" class="img-responsive" alt="">
-                                        </div>
-                                        <div class="courses-date">
-                                             <span title="Author"><i class="fa fa-user"></i> John Doe</span>
-                                             <span title="Date"><i class="fa fa-calendar"></i> 12/06/2020 10:30</span>
-                                             <span title="Views"><i class="fa fa-eye"></i> 114</span>
-                                        </div>
-                                   </div>
+		</div><!--/.scroll-Top-->
 
-                                   <div class="courses-detail">
-                                        <h3><a href="blog-post-details.html">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</a></h3>
-                                   </div>
+	</footer><!--/.contact-->
+	<!--contact end-->
 
-                                   <div class="courses-info">
-                                        <a href="blog-post-details.html" class="section-btn btn btn-primary btn-block">Read More</a>
-                                   </div>
-                              </div>
-                         </div>
 
-                         <div class="col-md-4 col-sm-4">
-                              <div class="courses-thumb courses-thumb-secondary">
-                                   <div class="courses-top">
-                                        <div class="courses-image">
-                                             <img src="images/blog-2-720x480.jpg" class="img-responsive" alt="">
-                                        </div>
-                                        <div class="courses-date">
-                                             <span title="Author"><i class="fa fa-user"></i> John Doe</span>
-                                             <span title="Date"><i class="fa fa-calendar"></i> 12/06/2020 10:30</span>
-                                             <span title="Views"><i class="fa fa-eye"></i> 114</span>
-                                        </div>
-                                   </div>
 
-                                   <div class="courses-detail">
-                                        <h3><a href="blog-post-details.html">Tempora molestiae, iste, consequatur unde sint praesentium!</a></h3>
-                                   </div>
+	<!-- Include all js compiled plugins (below), or include individual files as needed -->
 
-                                   <div class="courses-info">
-                                        <a href="blog-post-details.html" class="section-btn btn btn-primary btn-block">Read More</a>
-                                   </div>
-                              </div>
-                         </div>
+	<script src="{{ asset('assetsPiaggio/js/jquery.js') }}"></script>
 
-                         <div class="col-md-4 col-sm-4">
-                              <div class="courses-thumb courses-thumb-secondary">
-                                   <div class="courses-top">
-                                        <div class="courses-image">
-                                             <img src="images/blog-3-720x480.jpg" class="img-responsive" alt="">
-                                        </div>
-                                        <div class="courses-date">
-                                             <span title="Author"><i class="fa fa-user"></i> John Doe</span>
-                                             <span title="Date"><i class="fa fa-calendar"></i> 12/06/2020 10:30</span>
-                                             <span title="Views"><i class="fa fa-eye"></i> 114</span>
-                                        </div>
-                                   </div>
+	<!--modernizr.min.js-->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
 
-                                   <div class="courses-detail">
-                                        <h3><a href="blog-post-details.html">A voluptas ratione, error provident distinctio, eaque id officia?</a></h3>
-                                   </div>
+	<!--bootstrap.min.js-->
+	<script src="{{ asset('assetsPiaggio/js/bootstrap.min.js') }}"></script>
 
-                                   <div class="courses-info">
-                                        <a href="blog-post-details.html" class="section-btn btn btn-primary btn-block">Read More</a>
-                                   </div>
-                              </div>
-                         </div>
-                    </div>
-               </div>
-          </section>
-          <section id="testimonial">
-               <div class="container">
-                    <div class="row">
+	<!-- bootsnav js -->
+	<script src="{{ asset('assetsPiaggio/js/bootsnav.js') }}"></script>
 
-                         <div class="col-md-12 col-sm-12">
-                              <div class="section-title text-center">
-                                   <h2>Testimonials <small>from around the world</small></h2>
-                              </div>
+	<!--owl.carousel.js-->
+	<script src="{{ asset('assetsPiaggio/js/owl.carousel.min.js') }}"></script>
 
-                              <div class="owl-carousel owl-theme owl-client">
-                                   <div class="col-md-4 col-sm-4">
-                                        <div class="item">
-                                             <div class="tst-image">
-                                                  <img src="images/tst-image-1-200x216.jpg" class="img-responsive" alt="">
-                                             </div>
-                                             <div class="tst-author">
-                                                  <h4>Jackson</h4>
-                                                  <span>Shopify Developer</span>
-                                             </div>
-                                             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ullam voluptas, facilis adipisci dolorem exercitationem nemo aut error impedit repudiandae iusto.</p>
-                                             <div class="tst-rating">
-                                                  <i class="fa fa-star"></i>
-                                                  <i class="fa fa-star"></i>
-                                                  <i class="fa fa-star"></i>
-                                                  <i class="fa fa-star"></i>
-                                                  <i class="fa fa-star"></i>
-                                             </div>
-                                        </div>
-                                   </div>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
 
-                                   <div class="col-md-4 col-sm-4">
-                                        <div class="item">
-                                             <div class="tst-image">
-                                                  <img src="images/tst-image-2-200x216.jpg" class="img-responsive" alt="">
-                                             </div>
-                                             <div class="tst-author">
-                                                  <h4>Camila</h4>
-                                                  <span>Marketing Manager</span>
-                                             </div>
-                                             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente error, unde eos laborum consequatur officiis perferendis vel debitis, dolore, ipsum quibusdam culpa quisquam, reiciendis aspernatur.</p>
-                                             <div class="tst-rating">
-                                                  <i class="fa fa-star"></i>
-                                                  <i class="fa fa-star"></i>
-                                                  <i class="fa fa-star"></i>
-                                             </div>
-                                        </div>
-                                   </div>
-
-                                   <div class="col-md-4 col-sm-4">
-                                        <div class="item">
-                                             <div class="tst-image">
-                                                  <img src="images/tst-image-3-200x216.jpg" class="img-responsive" alt="">
-                                             </div>
-                                             <div class="tst-author">
-                                                  <h4>Barbie</h4>
-                                                  <span>Art Director</span>
-                                             </div>
-                                             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sit laborum minima autem, reprehenderit mollitia amet id, beatae quo sequi culpa assumenda neque a quisquam, magni.</p>
-                                             <div class="tst-rating">
-                                                  <i class="fa fa-star"></i>
-                                                  <i class="fa fa-star"></i>
-                                                  <i class="fa fa-star"></i>
-                                                  <i class="fa fa-star"></i>
-                                             </div>
-                                        </div>
-                                   </div>
-
-                                   <div class="col-md-4 col-sm-4">
-                                        <div class="item">
-                                             <div class="tst-image">
-                                                  <img src="images/tst-image-4-200x216.jpg" class="img-responsive" alt="">
-                                             </div>
-                                             <div class="tst-author">
-                                                  <h4>Andrio</h4>
-                                                  <span>Web Developer</span>
-                                             </div>
-                                             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolore natus culpa laudantium sit dolores quidem at nulla, iure atque laborum! Odit tempora, enim aliquid at modi illum ducimus explicabo soluta.</p>
-                                             <div class="tst-rating">
-                                                  <i class="fa fa-star"></i>
-                                                  <i class="fa fa-star"></i>
-                                                  <i class="fa fa-star"></i>
-                                                  <i class="fa fa-star"></i>
-                                             </div>
-                                        </div>
-                                   </div>
-
-                              </div>
-                        </div>
-                    </div>
-               </div>
-          </section>
-     </main>
-
-     <!-- CONTACT -->
-     <section id="contact">
-          <div class="container">
-               <div class="row">
-
-                    <div class="col-md-6 col-sm-12">
-                         <form id="contact-form" role="form" action="" method="post">
-                              <div class="section-title">
-                                   <h2>Contact us <small>we love conversations. let us talk!</small></h2>
-                              </div>
-
-                              <div class="col-md-12 col-sm-12">
-                                   <input type="text" class="form-control" placeholder="Enter full name" name="name" required>
-
-                                   <input type="email" class="form-control" placeholder="Enter email address" name="email" required>
-
-                                   <textarea class="form-control" rows="6" placeholder="Tell us about your message" name="message" required></textarea>
-                              </div>
-
-                              <div class="col-md-4 col-sm-12">
-                                   <input type="submit" class="form-control" name="send message" value="Send Message">
-                              </div>
-
-                         </form>
-                    </div>
-
-                    <div class="col-md-6 col-sm-12">
-                         <div class="contact-image">
-                              <img src="images/contact-1-600x400.jpg" class="img-responsive" alt="Smiling Two Girls">
-                         </div>
-                    </div>
-
-               </div>
-          </div>
-     </section>
-
-     <!-- FOOTER -->
-     <footer id="footer">
-          <div class="container">
-               <div class="row">
-
-                    <div class="col-md-4 col-sm-6">
-                         <div class="footer-info">
-                              <div class="section-title">
-                                   <h2>Headquarter</h2>
-                              </div>
-                              <address>
-                                   <p>212 Barrington Court <br>New York, ABC 10001</p>
-                              </address>
-
-                              <ul class="social-icon">
-                                   <li><a href="#" class="fa fa-facebook-square" attr="facebook icon"></a></li>
-                                   <li><a href="#" class="fa fa-twitter"></a></li>
-                                   <li><a href="#" class="fa fa-instagram"></a></li>
-                              </ul>
-
-                              <div class="copyright-text">
-                                   <p>Copyright &copy; 2020 Company Name</p>
-                                   <p>Template by: <a href="https://www.phpjabbers.com/">PHPJabbers.com</a></p>
-                              </div>
-                         </div>
-                    </div>
-
-                    <div class="col-md-4 col-sm-6">
-                         <div class="footer-info">
-                              <div class="section-title">
-                                   <h2>Contact Info</h2>
-                              </div>
-                              <address>
-                                   <p>+1 333 4040 5566</p>
-                                   <p><a href="mailto:contact@company.com">contact@company.com</a></p>
-                              </address>
-
-                              <div class="footer_menu">
-                                   <h2>Quick Links</h2>
-                                   <ul>
-                                        <li><a href="index.html">Home</a></li>
-                                        <li><a href="about-us.html">About Us</a></li>
-                                        <li><a href="terms.html">Terms & Conditions</a></li>
-                                        <li><a href="contact.html">Contact Us</a></li>
-                                   </ul>
-                              </div>
-                         </div>
-                    </div>
-
-                    <div class="col-md-4 col-sm-12">
-                         <div class="footer-info newsletter-form">
-                              <div class="section-title">
-                                   <h2>Newsletter Signup</h2>
-                              </div>
-                              <div>
-                                   <div class="form-group">
-                                        <form action="#" method="get">
-                                             <input type="email" class="form-control" placeholder="Enter your email" name="email" id="email" required>
-                                             <input type="submit" class="form-control" name="submit" id="form-submit" value="Send me">
-                                        </form>
-                                        <span><sup>*</sup> Please note - we do not spam your email.</span>
-                                   </div>
-                              </div>
-                         </div>
-                    </div>
-
-               </div>
-          </div>
-     </footer>
-
-     <!-- SCRIPTS -->
-     <script src="{{ asset('js/jquery.js') }}"></script>
-     <script src="{{ asset('js/bootstrap.min.js') }}"></script>
-     <script src="{{ asset('js/owl.carousel.min.js') }}"></script>
-     <script src="{{ asset('js/smoothscroll.js') }}"></script>
-     <script src="{{ asset('js/custom.js') }}"></script>
+	<!--Custom JS-->
+	<script src="{{ asset('assetsPiaggio/js/custom.js') }}"></script>
 
 </body>
+
 </html>

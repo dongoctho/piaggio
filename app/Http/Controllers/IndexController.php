@@ -136,6 +136,19 @@ class IndexController extends Controller
     {
         $oldSearch = "";
         $products = $this->storageRepository->getProductSale();
+        $manufactures = $this->manufactureRepository->getAll();
+        $categories = $this->categoryRepository->getAll();
+        $column = [
+            'storages.quantity',
+            'products.id as id',
+            'products.description',
+            'products.name',
+            'products.price',
+            'products.image',
+            'storages.product_id',
+            'storages.created_at'
+        ];
+        $productAll = $this->productRepository->getByCondition("", $column);
         $user = auth()->user();
         $count = 0;
 
@@ -143,7 +156,7 @@ class IndexController extends Controller
             $count = $this->cartRepository->countProductInCart($user->id);
         }
 
-        return view('client.index', compact('products', 'user', 'count'));
+        return view('client.index', compact('products', 'user', 'count', 'manufactures', 'categories', 'productAll'));
     }
 
     // show index contact

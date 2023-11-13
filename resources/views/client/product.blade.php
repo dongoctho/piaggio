@@ -1,273 +1,384 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html class="no-js" lang="en">
+
 <head>
+    <!-- meta data -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
-     <title>PHPJabber | Car Rental Website Template</title>
+    <!--font-family-->
+    <link
+        href="https://fonts.googleapis.com/css?family=Poppins:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i"
+        rel="stylesheet">
 
-     <meta charset="UTF-8">
-     <meta http-equiv="X-UA-Compatible" content="IE=Edge">
-     <meta name="description" content="">
-     <meta name="keywords" content="">
-     <meta name="author" content="">
-     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link href="https://fonts.googleapis.com/css?family=Rufina:400,700" rel="stylesheet">
 
-     <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}">
-     <link rel="stylesheet" href="{{ asset('css/font-awesome.min.css') }}">
-     <link rel="stylesheet" href="{{ asset('css/owl.carousel.css') }}">
-     <link rel="stylesheet" href="{{ asset('css/owl.theme.default.min.css') }}">
+    <!-- title of site -->
+    <title>CarVilla</title>
 
-     <!-- MAIN CSS -->
-     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+    <!-- For favicon png -->
+	<link rel="shortcut icon" type="image/icon" href="{{ asset('assetsPiaggio/logo/favicon.png') }}" />
+
+	<!--font-awesome.min.css-->
+	<link rel="stylesheet" href="{{ asset('assetsPiaggio/css/font-awesome.min.css') }}">
+
+	<!--linear icon css-->
+	<link rel="stylesheet" href="{{ asset('assetsPiaggio/css/linearicons.css') }}">
+
+	<!--flaticon.css-->
+	<link rel="stylesheet" href="{{ asset('assetsPiaggio/css/flaticon.css') }}">
+
+	<!--animate.css-->
+	<link rel="stylesheet" href="{{ asset('assetsPiaggio/css/animate.css') }}">
+
+	<!--owl.carousel.css-->
+	<link rel="stylesheet" href="{{ asset('assetsPiaggio/css/owl.carousel.min.css') }}">
+	<link rel="stylesheet" href="{{ asset('assetsPiaggio/css/owl.theme.default.min.css') }}">
+
+	<!--bootstrap.min.css-->
+	<link rel="stylesheet" href="{{ asset('assetsPiaggio/css/bootstrap.min.css') }}">
+
+	<!-- bootsnav -->
+	<link rel="stylesheet" href="{{ asset('assetsPiaggio/css/bootsnav.css') }}">
+
+	<!--style.css-->
+	<link rel="stylesheet" href="{{ asset('assetsPiaggio/css/style.css') }}">
+
+	<!--responsive.css-->
+	<link rel="stylesheet" href="{{ asset('assetsPiaggio/css/responsive.css') }}">
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+
+    <!--[if lt IE 9]>
+			<script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+			<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+        <![endif]-->
 
 </head>
-<body id="top" data-spy="scroll" data-target=".navbar-collapse" data-offset="50">
 
-     <!-- PRE LOADER -->
-     <section class="preloader">
-          <div class="spinner">
+<body>
+    <!--[if lte IE 9]>
+            <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
+        <![endif]-->
 
-               <span class="spinner-rotate"></span>
+    <section id="home" class="welcome-hero" style="background: #2a2d54; height: 100%; max-height: 120px;">
 
-          </div>
-     </section>
+        <!-- top-area Start -->
+        <div class="top-area">
+            <div class="header-area">
+                <!-- Start Navigation -->
+                <nav class="navbar navbar-default bootsnav  navbar-sticky navbar-scrollspy"
+                    data-minus-value-desktop="70" data-minus-value-mobile="55" data-speed="1000">
 
+                    <div class="container">
 
-     <!-- MENU -->
-     <section class="navbar custom-navbar navbar-fixed-top" role="navigation">
-          <div class="container">
+                        <!-- Start Header Navigation -->
+                        <div class="navbar-header">
+                            <button type="button" class="navbar-toggle" data-toggle="collapse"
+                                data-target="#navbar-menu">
+                                <i class="fa fa-bars"></i>
+                            </button>
+                            <a class="navbar-brand" href="index.html">piaggio<span></span></a>
 
-               <div class="navbar-header">
-                    <button class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                         <span class="icon icon-bar"></span>
-                         <span class="icon icon-bar"></span>
-                         <span class="icon icon-bar"></span>
-                    </button>
+                        </div><!--/.navbar-header-->
+                        <!-- End Header Navigation -->
 
-                    <!-- lOGO TEXT HERE -->
-                    <a href="#" class="navbar-brand">Car Rental Website</a>
-               </div>
+                        <!-- Collect the nav links, forms, and other content for toggling -->
+                        <div class="collapse navbar-collapse menu-ui-design" id="navbar-menu">
+                            <ul class="nav navbar-nav navbar-right" data-in="fadeInDown" data-out="fadeOutUp">
+                                <li class=""><a href="{{route('client_index')}}">Trang chủ</a></li>
+                                <li class=""><a href="{{route('show_product_index')}}">Sản phẩm</a></li>
+                                <li class="">
+                                    <?php
+                                        if (auth()->user())
+                                        {
+                                    ?>
+                                        <a href="{{route('logout')}}" class="nav-item nav-link">Đăng Xuất</a>
+                                    <?php
+                                        } else {
+                                    ?>
+                                        <a href="{{route('login_page')}}" class="nav-item nav-link">Đăng Nhập</a>
+                                    <?php
+                                        }
+                                    ?>
+                                </li>
 
-               <!-- MENU LINKS -->
-               <div class="collapse navbar-collapse">
-                <ul class="nav navbar-nav navbar-nav-first">
-                     <li><a href="{{route('client_index')}}">Home</a></li>
-                     <li><a href="{{route('fleet')}}">Fleet</a></li>
-                     <li class="active"><a href="{{route('show_product_index')}}">Offers</a></li>
-                     <li class="dropdown">
-                          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About<span class="caret"></span></a>
+                            </ul><!--/.nav -->
+                        </div><!-- /.navbar-collapse -->
+                    </div><!--/.container-->
+                </nav><!--/nav-->
+                <!-- End Navigation -->
+            </div><!--/.header-area-->
+            <div class="clearfix"></div>
 
-                          <ul class="dropdown-menu">
-                            <li><a href="{{route('blog')}}">Blog</a></li>
-                            <li><a href="{{route('aboutUs')}}">About Us</a></li>
-                            <li><a href="{{route('team')}}">Team</a></li>
-                            <li><a href="{{route('testimonials')}}">Testimonials</a></li>
-                            <li><a href="{{route('terms')}}">Terms</a></li>
-                       </ul>
-                     </li>
-                     <li><a href="{{route('client_contact')}}">Contact Us</a></li>
-                     <li><a href="login.html">Login</a></li>
-                </ul>
-           </div>
+        </div><!-- /.top-area-->
+        <!-- top-area End -->
 
-          </div>
-     </section>
-
-     <section>
-          <div class="container">
-               <div class="text-center">
-                    <h1>Offers</h1>
-
-                    <br>
-
-                    <p class="lead">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illo, alias.</p>
-               </div>
-          </div>
-     </section>
-
-     <div class="row">
-        <div class="col-md-12 col-sm-12">
-             <div class="section-title text-center">
-                  <h2>Offers <small>Lorem ipsum dolor sit amet.</small></h2>
-             </div>
-        </div>
-        @foreach ($new_products as $new_productses)
-        <div class="col-md-4 col-sm-6">
-           <div class="team-thumb">
-               <div class="team-image">
-                    <img src="{{asset('uploads/'.$new_productses->image)}}" class="img-responsive" alt="">
-               </div>
-               <div class="team-info">
-                    <h3>{{$new_productses->name}}</h3>
-
-                    <p class="lead"><small>{{number_format($new_productses->price)}} VND</small></p>
-
-                    <span>{{$new_productses->description}}</span>
-               </div>
-               <div class="team-thumb-actions">
-                    <a href="{{route('product_detail', ['id'=>$new_productses->id])}}" class="section-btn btn btn-primary btn-block">View Offer</a>
-               </div>
-          </div>
-        </div>
-        @endforeach
-   </div>
-
-     <section class="section-background">
-          <div class="container">
-            <div class="row">
-                @foreach ($products as $productses)
-                <div class="col-md-4 col-sm-4">
-                    <div class="courses-thumb courses-thumb-secondary">
-                         <div class="courses-top">
-                              <div class="courses-image">
-                                   <img style="object-fit: cover;" src="{{asset('uploads/'.$productses->image)}}" class="img-responsive" alt="">
-                              </div>
-                         </div>
-
-                         <div class="courses-detail">
-                              <h3><a href="fleet.html">{{$productses->name}}</a></h3>
-                              <p class="lead"><small>{{number_format($productses->price)}} VND</small></p>
-                              <p>{{$productses->description}}</p>
-                         </div>
-
-                         <div class="courses-info">
-                              <button type="button" data-toggle="modal" data-target=".bs-example-modal" class="section-btn btn btn-primary btn-block">Book Now</button>
-                         </div>
-                    </div>
-               </div>
-                @endforeach
-               </div>
-               <div class="col-12 pb-1" style="display: flex;  justify-content: center">
-                {!! $products->appends($data)->links() !!}
+        <div class="container">
+            <div class="welcome-hero-txt">
+                <!-- <h2>NHẬN XE MONG MUỐN VỚI GIÁ HỢP LÝ</h2>
+                    <p>
+                        Đây là trang chủ web Piaggio
+                    </p>
+                    <button class="welcome-btn" onclick="window.location.href='#'">Test</button> -->
             </div>
-          </div>
-     </section>
+        </div>
 
-     <!-- FOOTER -->
-     <footer id="footer">
-          <div class="container">
-               <div class="row">
 
-                    <div class="col-md-4 col-sm-6">
-                         <div class="footer-info">
-                              <div class="section-title">
-                                   <h2>Headquarter</h2>
-                              </div>
-                              <address>
-                                   <p>212 Barrington Court <br>New York, ABC 10001</p>
-                              </address>
 
-                              <ul class="social-icon">
-                                   <li><a href="#" class="fa fa-facebook-square" attr="facebook icon"></a></li>
-                                   <li><a href="#" class="fa fa-twitter"></a></li>
-                                   <li><a href="#" class="fa fa-instagram"></a></li>
-                              </ul>
+    </section><!--/.welcome-hero-->
 
-                              <div class="copyright-text">
-                                   <p>Copyright &copy; 2020 Company Name</p>
-                                   <p>Template by: <a href="https://www.phpjabbers.com/">PHPJabbers.com</a></p>
-                              </div>
-                         </div>
+
+    <!-- Sản phẩm -->
+    <div style="width: 100%; max-width: 1170px; margin: auto;">
+        <h1>Nguyen Duc Nghia</h1>
+    </div>
+
+    <section id="new-cars" class="new-cars">
+        <div class="container">
+            <div class="section-header">
+                <p>Kiểm tra những chiếc xe mới nhất</p>
+                <h2>Mẫu mới nhất</h2>
+            </div><!--/.section-header-->
+            <div class="new-cars-content">
+                <div class="owl-carousel owl-theme" id="new-cars-carousel">
+
+                    @foreach ($new_products as $productses)
+                    <div class="new-cars-item">
+						<div class="single-new-cars-item">
+							<div class="row">
+								<div class="col-md-7 col-sm-12">
+									<div class="new-cars-img">
+										<a href="{{route('product_detail', ['id'=>$productses->id])}}"><img src="{{asset('uploads/'.$productses->image)}}" alt="img" /></a>
+									</div><!--/.new-cars-img-->
+								</div>
+								<div class="col-md-5 col-sm-12">
+									<div class="new-cars-txt">
+										<h2><a href="{{route('product_detail', ['id'=>$productses->id])}}">{{ $productses->name }}</a></h2>
+										<p>
+											{{ $productses->description }}
+										</p>
+										<p class="new-cars-para2">
+                                            @foreach ($categories as $category)
+                                                @if ($productses->category_id == $category->id)
+                                                    {{ $category->name }}
+                                                @endif
+                                            @endforeach
+										</p>
+										<button class="welcome-btn new-cars-btn" onclick="window.location.href='{{route('product_detail', ['id'=>$productses->id])}}'">
+											view details
+										</button>
+									</div><!--/.new-cars-txt-->
+								</div><!--/.col-->
+							</div><!--/.row-->
+						</div><!--/.single-new-cars-item-->
+					</div><!--/.new-cars-item-->
+                    @endforeach
+
+                </div><!--/#new-cars-carousel-->
+            </div><!--/.new-cars-content-->
+        </div><!--/.container-->
+
+    </section><!--/.new-cars-->
+    <!--new-cars end -->
+    <!--End Sản phẩm -->
+
+
+
+    <!--featured-cars start -->
+    <section id="featured-cars" class="featured-cars">
+        <div class="container">
+            <div class="section-header">
+                <p>Kiểm tra những chiếc xe nổi bật</p>
+                <h2>Tất cả mọi loại xe</h2>
+            </div><!--/.section-header-->
+            <div class="featured-cars-content">
+                <div class="row">
+
+                    @foreach ($productAll as $productAlls)
+                    <div class="col-lg-3 col-md-4 col-sm-6">
+						<div class="single-featured-cars">
+							<div class="featured-img-box">
+								<div class="featured-cars-img">
+									<a href="{{route('product_detail', ['id'=>$productAlls->id])}}"><img src="{{asset('uploads/'.$productAlls->image)}}" alt="cars"></a>
+								</div>
+								<div class="featured-model-info">
+									<p>
+										model: 2017
+										<span class="featured-mi-span"> 3100 mi</span>
+										<span class="featured-hp-span"> 240HP</span>
+										automatic
+									</p>
+								</div>
+							</div>
+							<div class="featured-cars-txt">
+								<h2><a href="{{route('product_detail', ['id'=>$productAlls->id])}}">{{$productAlls->name}}</a></h2>
+								@if ($productAlls->discount == 0)
+                                <h3>{{number_format($productAlls->price, 0, ",", ".")}} VND</h3>
+                                @elseif ($productAlls->product_type == 0)
+                                <h3>{{number_format($productAlls->price, 0, ",", ".")}} VND</h3>
+                                    <h3>{{number_format($productAlls->price * (1 - ($productAlls->discount / 100)), 0, ",", ".")}} VND</h3>
+                                @elseif ($productAlls->product_type == 1)
+                                    <h3>{{number_format($productAlls->price, 0, ",", ".")}}</h3>
+                                    <div class="">
+                                        <h3> {{number_format($productAlls->price - $productAlls->discount, 0, ",", ".")}}</h3>
+                                    </div>
+                                @endif
+								<p>
+									{{ $productAlls->description }}
+								</p>
+							</div>
+						</div>
+					</div>
+                    @endforeach
+
+                </div>
+
+            </div>
+        </div><!--/.container-->
+
+    </section><!--/.featured-cars-->
+    <!--featured-cars end -->
+
+
+
+
+
+
+
+
+    <!--contact start-->
+    <footer id="contact" class="contact">
+        <div class="container">
+            <div class="footer-top">
+                <div class="row">
+                    <div class="col-md-3 col-sm-6">
+                        <div class="single-footer-widget">
+                            <div class="footer-logo">
+                                <a href="index.html">Piaggio</a>
+                            </div>
+                            <p>
+                                Nhưng lúc đó tôi rơi vào đau đớn và lao động nặng nề. Trong những năm qua, tôi sẽ đến.
+                            </p>
+                            <div class="footer-contact">
+                                <p>nghia5141@gmail.com</p>
+                                <p>+84 948766582</p>
+                            </div>
+                        </div>
                     </div>
-
-                    <div class="col-md-4 col-sm-6">
-                         <div class="footer-info">
-                              <div class="section-title">
-                                   <h2>Contact Info</h2>
-                              </div>
-                              <address>
-                                   <p>+1 333 4040 5566</p>
-                                   <p><a href="mailto:contact@company.com">contact@company.com</a></p>
-                              </address>
-
-                              <div class="footer_menu">
-                                   <h2>Quick Links</h2>
-                                   <ul>
-                                        <li><a href="index.html">Home</a></li>
-                                        <li><a href="about-us.html">About Us</a></li>
-                                        <li><a href="terms.html">Terms & Conditions</a></li>
-                                        <li><a href="contact.html">Contact Us</a></li>
-                                   </ul>
-                              </div>
-                         </div>
+                    <div class="col-md-2 col-sm-6">
+                        <div class="single-footer-widget">
+                            <h2>Về web</h2>
+                            <ul>
+                                <li><a href="#">about us</a></li>
+                                <li><a href="#">career</a></li>
+                                <li><a href="#">terms <span> of service</span></a></li>
+                                <li><a href="#">privacy policy</a></li>
+                            </ul>
+                        </div>
                     </div>
-
-                    <div class="col-md-4 col-sm-12">
-                         <div class="footer-info newsletter-form">
-                              <div class="section-title">
-                                   <h2>Newsletter Signup</h2>
-                              </div>
-                              <div>
-                                   <div class="form-group">
-                                        <form action="#" method="get">
-                                             <input type="email" class="form-control" placeholder="Enter your email" name="email" id="email" required>
-                                             <input type="submit" class="form-control" name="submit" id="form-submit" value="Send me">
-                                        </form>
-                                        <span><sup>*</sup> Please note - we do not spam your email.</span>
-                                   </div>
-                              </div>
-                         </div>
+                    <div class="col-md-3 col-xs-12">
+                        <div class="single-footer-widget">
+                            <h2>Nhãn hiệu hàng đầu</h2>
+                            <div class="row">
+                                <div class="col-md-7 col-xs-6">
+                                    <ul>
+                                        <li><a href="#">Piaggio</a></li>
+                                        <li><a href="#">Piaggio</a></li>
+                                        <li><a href="#">Piaggio</a></li>
+                                        <li><a href="#">Piaggio</a></li>
+                                        <li><a href="#">Piaggio</a></li>
+                                        <li><a href="#">Piaggio</a></li>
+                                    </ul>
+                                </div>
+                                <div class="col-md-5 col-xs-6">
+                                    <ul>
+                                        <li><a href="#">Piaggio</a></li>
+                                        <li><a href="#">Piaggio</a></li>
+                                        <li><a href="#">Piaggio</a></li>
+                                        <li><a href="#">Piaggio</a></li>
+                                        <li><a href="#">Piaggio</a></li>
+                                        <li><a href="#">Piaggio</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-
-               </div>
-          </div>
-     </footer>
-
-     <div class="modal fade bs-example-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-          <div class="modal-dialog" role="document">
-               <div class="modal-content">
-                    <div class="modal-header">
-                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                         <h4 class="modal-title" id="gridSystemModalLabel">Book Now</h4>
+                    <div class="col-md-offset-1 col-md-3 col-sm-6">
+                        <div class="single-footer-widget">
+                            <h2>Gửi phản hồi</h2>
+                            <div class="footer-newsletter">
+                                <p>
+                                    Đăng ký để cập nhật tin tức và thông tin mới nhất
+                                </p>
+                            </div>
+                            <div class="hm-foot-email">
+                                <div class="foot-email-box">
+                                    <input type="text" class="form-control" placeholder="Nhập Email">
+                                </div><!--/.foot-email-box-->
+                                <div class="foot-email-subscribe">
+                                    <span><i class="fa fa-arrow-right"></i></span>
+                                </div><!--/.foot-email-icon-->
+                            </div><!--/.hm-foot-email-->
+                        </div>
                     </div>
-
-                    <div class="modal-body">
-                         <form action="#" id="contact-form">
-                              <div class="row">
-                                   <div class="col-md-6">
-                                        <input type="text" class="form-control" placeholder="Pick-up location" required>
-                                   </div>
-
-                                   <div class="col-md-6">
-                                        <input type="text" class="form-control" placeholder="Return location" required>
-                                   </div>
-                              </div>
-
-                              <div class="row">
-                                   <div class="col-md-6">
-                                        <input type="text" class="form-control" placeholder="Pick-up date/time" required>
-                                   </div>
-
-                                   <div class="col-md-6">
-                                        <input type="text" class="form-control" placeholder="Return date/time" required>
-                                   </div>
-                              </div>
-                              <input type="text" class="form-control" placeholder="Enter full name" required>
-
-                              <div class="row">
-                                   <div class="col-md-6">
-                                        <input type="text" class="form-control" placeholder="Enter email address" required>
-                                   </div>
-
-                                   <div class="col-md-6">
-                                        <input type="text" class="form-control" placeholder="Enter phone" required>
-                                   </div>
-                              </div>
-                         </form>
+                </div>
+            </div>
+            <div class="footer-copyright">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <p>
+                            &copy; designed and developed by <a href="#">Nguyen Duc Nghia</a>.
+                        </p><!--/p-->
                     </div>
-
-                    <div class="modal-footer">
-                         <button type="button" class="section-btn btn btn-primary">Book Now</button>
+                    <div class="col-sm-6">
+                        <div class="footer-social">
+                            <a href="#"><i class="fa fa-facebook"></i></a>
+                            <a href="#"><i class="fa fa-instagram"></i></a>
+                            <a href="#"><i class="fa fa-linkedin"></i></a>
+                            <a href="#"><i class="fa fa-pinterest-p"></i></a>
+                            <a href="#"><i class="fa fa-behance"></i></a>
+                        </div>
                     </div>
-               </div>
-          </div>
-     </div>
+                </div>
+            </div><!--/.footer-copyright-->
+        </div><!--/.container-->
 
-     <!-- SCRIPTS -->
-     <script src="{{ asset('js/jquery.js') }}"></script>
-     <script src="{{ asset('js/bootstrap.min.js') }}"></script>
-     <script src="{{ asset('js/owl.carousel.min.js') }}"></script>
-     <script src="{{ asset('js/smoothscroll.js') }}"></script>
-     <script src="{{ asset('js/custom.js') }}"></script>
+        <div id="scroll-Top">
+            <div class="return-to-top">
+                <i class="fa fa-angle-up " id="scroll-top" data-toggle="tooltip" data-placement="top" title=""
+                    data-original-title="Back to Top" aria-hidden="true"></i>
+            </div>
+
+        </div><!--/.scroll-Top-->
+
+    </footer><!--/.contact-->
+    <!--contact end-->
+
+    <!-- Include all js compiled plugins (below), or include individual files as needed -->
+
+    <script src="{{ asset('assetsPiaggio/js/jquery.js') }}"></script>
+
+	<!--modernizr.min.js-->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
+
+	<!--bootstrap.min.js-->
+	<script src="{{ asset('assetsPiaggio/js/bootstrap.min.js') }}"></script>
+
+	<!-- bootsnav js -->
+	<script src="{{ asset('assetsPiaggio/js/bootsnav.js') }}"></script>
+
+	<!--owl.carousel.js-->
+	<script src="{{ asset('assetsPiaggio/js/owl.carousel.min.js') }}"></script>
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
+
+	<!--Custom JS-->
+	<script src="{{ asset('assetsPiaggio/js/custom.js') }}"></script>
 
 </body>
+
 </html>

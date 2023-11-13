@@ -57,6 +57,9 @@ class ProductController extends Controller
             $data[] = $product->name;
         }
         $user = auth()->user();
+        $products = $this->storageRepository->getProductSale();
+        $manufactures = $this->manufactureRepository->getAll();
+        $categories = $this->categoryRepository->getAll();
         $column = [
             'storages.quantity',
             'products.id as id',
@@ -67,7 +70,7 @@ class ProductController extends Controller
             'storages.product_id',
             'storages.created_at'
         ];
-        $products = $this->productRepository->getByCondition("", $column);
+        $productAll = $this->productRepository->getByCondition("", $column);
         $new_products = $this->productRepository->getNewProduct($column);
 
         $count = 0;
@@ -75,7 +78,7 @@ class ProductController extends Controller
         if ( isset($user) ) {
             $count = $this->cartRepository->countProductInCart($user->id);
         }
-        return view('client.product', compact('user', 'count', 'products', 'data', 'new_products'));
+        return view('client.product', compact('user', 'count', 'products', 'data', 'new_products', 'productAll'));
     }
 
     // show product detail client
