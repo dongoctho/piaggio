@@ -73,12 +73,10 @@ class ProductController extends Controller
         $productAll = $this->productRepository->getByCondition("", $column);
         $new_products = $this->productRepository->getNewProduct($column);
 
-        $count = 0;
-
         if ( isset($user) ) {
             $count = $this->cartRepository->countProductInCart($user->id);
         }
-        return view('client.product', compact('user', 'count', 'products', 'data', 'new_products', 'productAll'));
+        return view('client.product', compact('user', 'products', 'data', 'new_products', 'productAll'));
     }
 
     // show product detail client

@@ -81,7 +81,7 @@
                                 data-target="#navbar-menu">
                                 <i class="fa fa-bars"></i>
                             </button>
-                            <a class="navbar-brand" href="index.html">piaggio<span></span></a>
+                            <a class="navbar-brand" href="{{route('client_index')}}">piaggio<span></span></a>
 
                         </div><!--/.navbar-header-->
                         <!-- End Header Navigation -->
@@ -236,7 +236,9 @@
                     @endforeach
 
                 </div>
-
+                <div class="col-12 pb-1" style="display: flex;  justify-content: center">
+                    {!! $productAll->appends($data)->links() !!}
+                </div>
             </div>
         </div><!--/.container-->
 

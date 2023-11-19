@@ -82,7 +82,7 @@
 								data-target="#navbar-menu">
 								<i class="fa fa-bars"></i>
 							</button>
-							<a class="navbar-brand" href="index.html">piaggio<span></span></a>
+							<a class="navbar-brand" href="{{route('client_index')}}">piaggio<span></span></a>
 
 						</div><!--/.navbar-header-->
 						<!-- End Header Navigation -->

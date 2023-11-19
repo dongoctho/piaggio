@@ -90,7 +90,7 @@ class ProductRepository extends BaseRepository implements ProductRepositoryInter
             $query->where('name', 'like', '%'.$condition['findProductByName'].'%')
             ->get();
         }
-        return $query->paginate(6);
+        return $query->paginate(8);
     }
 
     public function getProductByCondition($condition, array $column = ['*'])
