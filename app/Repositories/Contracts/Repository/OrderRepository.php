@@ -31,14 +31,15 @@ class OrderRepository extends BaseRepository implements OrderRepositoryInterface
         return $query->get();
     }
 
-    public function sumSale($month)
+    public function sumSale($month, $year)
     {
         $query = $this->model->newQuery();
 
         $query->selectRaw("SUM(orders_detail.quantity) as sumSale")
               ->leftjoin("orders_detail", "orders.id", "=", "orders_detail.order_id")
               ->whereRaw("orders.status = 3")
-              ->whereRaw("DATE_FORMAT(orders.updated_at,'%m') = '" . $month . "'");
+              ->whereRaw("DATE_FORMAT(orders.updated_at,'%m') = '" . $month . "'")
+              ->whereRaw("DATE_FORMAT(orders.updated_at,'%Y') = '" . $year . "'");
 
         return $query->get();
     }

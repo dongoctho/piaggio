@@ -3,6 +3,9 @@
 <head>
     <title>Tìm kiếm đơn hàng</title>
     <link rel="stylesheet" type="text/css" href="style.css">
+  <!-- Vendor CSS Files -->
+  <link href="{{asset('assetss/vendor/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet">
+  <link href="{{asset('assetss/vendor/bootstrap-icons/bootstrap-icons.css')}}" rel="stylesheet">
 </head>
 <style>
     body {
