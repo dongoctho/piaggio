@@ -49,13 +49,6 @@ Route::get('/checkout/infor/detail/{id_user}/order/{id}',[OrderController::class
 Route::get('/checkout/infor/deleted/{id}',[OrderController::class, 'deleted'])->name('deleted_order');
 Route::get('/checkout/infor/reorder/{id}',[OrderController::class, 'reOrder'])->name('re_order');
 Route::get('/contact',[IndexController::class, 'indexContact'])->name('client_contact');
-Route::get('/fleet',[IndexController::class, 'fleet'])->name('fleet');
-Route::get('/blog',[IndexController::class, 'blog'])->name('blog');
-Route::get('/blog-post-details',[IndexController::class, 'blogDetail'])->name('blog_detail');
-Route::get('/aboutUs',[IndexController::class, 'aboutUs'])->name('aboutUs');
-Route::get('/team',[IndexController::class, 'team'])->name('team');
-Route::get('/testimonials',[IndexController::class, 'testimonials'])->name('testimonials');
-Route::get('/terms',[IndexController::class, 'terms'])->name('terms');
 Route::get('/productDetail/{id}',[ProductController::class, 'productDetail'])->name('product_detail');
 Route::post('/productDetail/{id}',[CartController::class, 'addCart'])->name('cart_detail');
 Route::get('/cartDetail',[CartController::class, 'showCart'])->name('show_cart');
@@ -72,6 +65,9 @@ route::get('/checkout/infor/exportPDF/{id}',[OrderController::class, 'exportPDF'
 //admin
 Route::prefix('admin')->middleware('CheckLogin')->group(function(){
     Route::get('/dashboard', [DashboardController::class, 'dashboard'])->name('dashboard');
+    Route::get('/dashboard/statistical_day', [DashboardController::class, 'saleDay'])->name('saleDay');
+    Route::get('/dashboard/find_order', [DashboardController::class, 'findOrder'])->name('findOrder');
+    Route::get('/dashboard/find_order_detail/{user_id}/order/{id}', [DashboardController::class, 'findOrderDetail'])->name('findOrderDetail');
 
     //User
     Route::prefix('user')->group(function(){

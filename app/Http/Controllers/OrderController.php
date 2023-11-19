@@ -20,6 +20,7 @@ use App\Services\SumPriceService;
 use Stripe\StripeClient;
 use Stripe\PaymentIntent;
 use \PDF;
+use Carbon\Carbon;
 
 class OrderController extends Controller
 {
@@ -78,10 +79,12 @@ class OrderController extends Controller
             'orders_detail.created_at'
         ];
         $data = $this->orderDetailRepository->getOrderDetail($user->id, $id, $column);
+        $order = $this->orderRepository->findOrder($id);
+        $time = Carbon::now('Asia/Ho_Chi_Minh');
 
-        // return view('client.download_pdf')->with('data', $data);
+        // return view('client.download_pdf', compact('data', 'order', 'time'));
 
-        $pdf = PDF::loadView('client.download_pdf', compact('data'));
+        $pdf = PDF::loadView('client.download_pdf', compact('data', 'order', 'time'));
         return $pdf->download('ThongTinDonHang.pdf');
     }
 

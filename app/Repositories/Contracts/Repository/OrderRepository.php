@@ -73,6 +73,27 @@ class OrderRepository extends BaseRepository implements OrderRepositoryInterface
         return $query->paginate(6);
     }
 
+    public function getFindOrder($firstDate, $endDate, array $column = ['*'])
+    {
+        $query = $this->model->newQuery();
+        $query->select($column)
+            ->where('orders.deleted_at', '=', null)
+            ->join('users', 'orders.user_id', '=', 'users.id')
+            ->orderByDesc('orders.id')
+            ->leftjoin('vouchers', 'orders.voucher_id', '=', 'vouchers.id');
+        if ($firstDate != "" && $endDate != "") {
+            $query->whereRaw("DATE_FORMAT(orders.created_at, '%Y-%m-%d') >= '" . $firstDate . "' and DATE_FORMAT(orders.created_at, '%Y-%m-%d') <= '" . $endDate . "'")->get();
+        }
+        if ($firstDate != "" && $endDate == "") {
+            $query->whereRaw("DATE_FORMAT(orders.created_at, '%Y-%m-%d') >= '" . $firstDate . "'")->get();
+        }
+        if ($firstDate == "" && $endDate != "") {
+            $query->whereRaw("DATE_FORMAT(orders.created_at, '%Y-%m-%d') <= '" . $endDate . "'")->get();
+        }
+
+        return $query->paginate(6);
+    }
+
     public function getAllOrder($userId)
     {
         $query = $this->model
@@ -81,6 +102,25 @@ class OrderRepository extends BaseRepository implements OrderRepositoryInterface
             ->orderByDesc('id');
 
         return $query->paginate(8);
+    }
+    public function statusOrderDay($status, $yes)
+    {
+        $query = $this->model->newQuery();
+
+        $query->selectRaw("COUNT(orders.id) as countStatus")
+              ->whereRaw("orders.status = " . $status)
+              ->whereRaw("DATE_FORMAT(orders.created_at, '%Y-%m-%d') > '" . $yes . "'");
+
+        return $query->get();
+    }
+    public function sumSaleDay($yes)
+    {
+        $query = $this->model->newQuery();
+
+        $query->selectRaw("count(orders.id) as sumSale")
+            ->whereRaw("DATE_FORMAT(orders.created_at, '%Y-%m-%d') > '" . $yes . "'");
+
+        return $query->get();
     }
 
 }

@@ -344,6 +344,47 @@
     <!--Custom JS-->
     <script src="{{ asset('assetsPiaggio/js/custom.js') }}"></script>
 
+    <script>
+        function deleteCategory(id) {
+            swal({
+            title: "Bạn muốn hủy?",
+            text: "",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+            })
+            .then((willDelete) => {
+                if (willDelete) {
+                    var url = 'infor/deleted/' + id;
+                    window.location = url;
+                    swal("Hủy thành công!", {
+                    icon: "success",
+                    });
+                } else {
+                    swal("Hủy Thất bại!");
+                }
+            });
+        }
+
+        function createOrder(id) {
+            swal({
+            title: "Bạn muốn đặt lại đơn hàng?",
+            text: "",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+            })
+            .then((willDelete) => {
+                if (willDelete) {
+                    var url = 'infor/reorder/' + id;
+                    window.location = url;
+                } else {
+                    swal("Đặt lại Thất bại!");
+                }
+            });
+        }
+    </script>
+
 </body>
 
 </html>
