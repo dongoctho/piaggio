@@ -70,8 +70,7 @@
                                                 <option value="{{$manufacture->id}}">{{$manufacture->name}}</option>
                                                 <?php
                                             }
-                                            ?>
-                                        @endphp
+                                        ?>
                                         @endforeach
                                     </select>
                                 </div>

@@ -186,7 +186,91 @@
     <!--new-cars end -->
     <!--End Sản phẩm -->
 
+    <div class="container" style="margin-top: 50px; margin-bottom: 60px">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="model-search-content">
+                    <form action="{{route('show_product_index')}}" method="GET">
 
+                    <div class="row">
+                        <div class="col-md-offset-1 col-md-2 col-sm-12">
+                            <div class="single-model-search">
+                                <h2>Tên xe</h2>
+                                <div class="">
+                                    <input
+                                     type="text"
+                                     name="findProductName"
+                                     @if (isset($dataSearch))
+                                        value="{{$dataSearch['findProductName']}}"
+                                     @endif
+                                     >
+                                </div><!-- /.model-select-icon -->
+                            </div>
+                            <div class="single-model-search">
+                                <h2>Danh mục</h2>
+                                <div class="model-select-icon">
+                                    <select class="form-control" name="findCategoryName">
+                                        @if (isset($dataSearch['findCategoryName']))
+                                        <option value="{{$categorySearch->id}}">{{$categorySearch->name}}</option>
+                                        @endif
+
+                                        <option value="">---</option><!-- /.option-->
+                                        @foreach ($categories as $category)
+                                        <option value="{{$category->id}}">{{$category->name}}</option>
+                                        @endforeach
+
+                                    </select><!-- /.select-->
+                                </div><!-- /.model-select-icon -->
+                            </div>
+                        </div>
+                        <div class="col-md-offset-1 col-md-2 col-sm-12">
+                            <div class="single-model-search">
+                                <h2>Chọn giá</h2>
+                                <div class="model-select-icon">
+                                    <select class="form-control" name="findPrice">
+
+                                        <option value="">Tất cả giá</option><!-- /.option-->
+
+                                        <option
+                                        value="1"
+                                        @if ($dataSearch['findPrice'] == 1)
+                                            selected
+                                        @endif
+                                        >0 - 100 triệu</option><!-- /.option-->
+                                        <option
+                                         value="2"
+                                         @if ($dataSearch['findPrice'] == 2)
+                                            selected
+                                        @endif
+                                         >100 triệu - 200 triệu</option><!-- /.option-->
+                                        <option
+                                         value="3"
+                                         @if ($dataSearch['findPrice'] == 3)
+                                            selected
+                                        @endif
+                                         >200 triệu trở lên</option><!-- /.option-->
+
+                                    </select><!-- /.select-->
+                                </div><!-- /.model-select-icon -->
+                            </div>
+                        </div>
+                        <div class="col-md-offset-1 col-md-2 col-sm-12">
+
+
+                        </div>
+                        <div class="col-md-2 col-sm-12">
+                            <div class="single-model-search text-center">
+                                <input value="search" class="welcome-btn model-search-btn" type="submit">
+                                <a href="{{route('show_product_index')}}" class="welcome-btn model-search-btn" style="padding-top: 17px">Reset</a>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!--featured-cars start -->
     <section id="featured-cars" class="featured-cars">
@@ -237,7 +321,7 @@
 
                 </div>
                 <div class="col-12 pb-1" style="display: flex;  justify-content: center">
-                    {!! $productAll->appends($data)->links() !!}
+                    {!! $productAll->appends($dataSearch)->links() !!}
                 </div>
             </div>
         </div><!--/.container-->

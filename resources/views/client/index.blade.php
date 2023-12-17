@@ -155,107 +155,58 @@
 			<div class="row">
 				<div class="col-md-12">
 					<div class="model-search-content">
+                        <form action="{{route('show_product_index')}}" method="GET">
+
 						<div class="row">
 							<div class="col-md-offset-1 col-md-2 col-sm-12">
 								<div class="single-model-search">
-									<h2>chọn năm</h2>
-									<div class="model-select-icon">
-										<select class="form-control">
-
-											<option value="default">năm</option><!-- /.option-->
-											<option value="2020">2020</option><!-- /.option-->
-											<option value="2021">2021</option><!-- /.option-->
-											<option value="2022">2022</option><!-- /.option-->
-											<option value="2023">2023</option><!-- /.option-->
-
-										</select><!-- /.select-->
+									<h2>Tên xe</h2>
+									<div class="">
+										<input type="text" name="findProductName">
 									</div><!-- /.model-select-icon -->
 								</div>
 								<div class="single-model-search">
-									<h2>Kiểu dáng</h2>
+									<h2>Danh mục</h2>
 									<div class="model-select-icon">
-										<select class="form-control">
+										<select class="form-control" name="findCategoryName">
 
-											<option value="default">style</option><!-- /.option-->
-
-											<option value="sedan">Thể thao</option><!-- /.option-->
-
-											<option value="van">Đường phố</option><!-- /.option-->
-											<option value="roadster">Đường trường</option><!-- /.option-->
+											<option value="">Tất cả danh mục</option><!-- /.option-->
+                                            @foreach ($categories as $category)
+                                            <option value="{{$category->id}}">{{$category->name}}</option>
+                                            @endforeach
 
 										</select><!-- /.select-->
 									</div><!-- /.model-select-icon -->
 								</div>
 							</div>
 							<div class="col-md-offset-1 col-md-2 col-sm-12">
-								<div class="single-model-search">
-									<h2>Hãng xe</h2>
-									<div class="model-select-icon">
-										<select class="form-control">
-
-											<option value="default">Chọn</option><!-- /.option-->
-
-											<option value="toyota">piaggio</option><!-- /.option-->
-
-										</select><!-- /.select-->
-									</div><!-- /.model-select-icon -->
-								</div>
-								<div class="single-model-search">
-									<h2>Tình trạng xe</h2>
-									<div class="model-select-icon">
-										<select class="form-control">
-
-											<option value="default">Tình trạng</option><!-- /.option-->
-
-											<option value="something">something</option><!-- /.option-->
-
-											<option value="something">something</option><!-- /.option-->
-											<option value="something">something</option><!-- /.option-->
-
-										</select><!-- /.select-->
-									</div><!-- /.model-select-icon -->
-								</div>
-							</div>
-							<div class="col-md-offset-1 col-md-2 col-sm-12">
-								<div class="single-model-search">
-									<h2>Chọn mẫu xe</h2>
-									<div class="model-select-icon">
-										<select class="form-control">
-
-											<option value="default">mẫu</option><!-- /.option-->
-
-											<option value="kia-rio">kia-rio</option><!-- /.option-->
-
-											<option value="mitsubishi">mitsubishi</option><!-- /.option-->
-											<option value="ford">ford</option><!-- /.option-->
-
-										</select><!-- /.select-->
-									</div><!-- /.model-select-icon -->
-								</div>
 								<div class="single-model-search">
 									<h2>Chọn giá</h2>
 									<div class="model-select-icon">
-										<select class="form-control">
+										<select class="form-control" name="findPrice">
 
-											<option value="default">giá</option><!-- /.option-->
+											<option  value="">Tất cả giá</option><!-- /.option-->
 
-											<option value="$0.00">$0.00</option><!-- /.option-->
-
-											<option value="$0.00">$0.00</option><!-- /.option-->
-											<option value="$0.00">$0.00</option><!-- /.option-->
+											<option value="1">0 - 100 triệu</option><!-- /.option-->
+											<option value="2">100 triệu - 200 triệu</option><!-- /.option-->
+											<option value="3">200 triệu trở lên</option><!-- /.option-->
 
 										</select><!-- /.select-->
 									</div><!-- /.model-select-icon -->
 								</div>
 							</div>
+							<div class="col-md-offset-1 col-md-2 col-sm-12">
+
+
+							</div>
 							<div class="col-md-2 col-sm-12">
 								<div class="single-model-search text-center">
-									<button class="welcome-btn model-search-btn" onclick="window.location.href='#'">
-										search
-									</button>
+									<input value="search" class="welcome-btn model-search-btn" type="submit">
 								</div>
 							</div>
 						</div>
+                    </form>
+
 					</div>
 				</div>
 			</div>

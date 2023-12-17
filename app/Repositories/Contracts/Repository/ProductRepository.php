@@ -60,34 +60,26 @@ class ProductRepository extends BaseRepository implements ProductRepositoryInter
         $query->select($column)->where('products.deleted_at', '=', null)
                                ->where('storages.quantity', '>', '0')
                                ->join('storages', 'products.id', '=', 'storages.product_id');
-
-        if (isset($condition['seachByPrice'])) {
-            if ($condition['seachByPrice'] == 1) {
-                $query->where('price', '<=', 50000);
+                               
+        if (isset($condition['findPrice'])) {
+            if ($condition['findPrice'] == 1) {
+                $query->where('price', '<=', 100000000);
             }
-            if ($condition['seachByPrice'] == 2) {
-                $query->where('price', '>', 50000)
-                      ->where('price', '<=', 200000);
+            if ($condition['findPrice'] == 2) {
+                $query->where('price', '>=', 100000000)
+                      ->where('price', '<=', 200000000);
             }
-            if ($condition['seachByPrice'] == 3) {
-                $query->where('price', '>', 200000)
-                      ->where('price', '<=', 500000);
-            }
-            if ($condition['seachByPrice'] == 4) {
-                $query->where('price', '>', 500000)
-                      ->where('price', '<=', 2000000);
-            }
-            if ($condition['seachByPrice'] == 5) {
-                $query->where('price', '>', 2000000);
+            if ($condition['findPrice'] == 3) {
+                $query->where('price', '>=', 200000000);
             }
         }
 
-        if (isset($condition['seachByCategory'])) {
-            $query->where('category_id', '=', $condition['seachByCategory']);
+        if (isset($condition['findCategoryName'])) {
+            $query->where('category_id', '=', $condition['findCategoryName']);
         }
 
-        if (isset($condition['findProductByName'])) {
-            $query->where('name', 'like', '%'.$condition['findProductByName'].'%')
+        if (isset($condition['findProductName'])) {
+            $query->where('name', 'like', '%'.$condition['findProductName'].'%')
             ->get();
         }
         return $query->paginate(8);
