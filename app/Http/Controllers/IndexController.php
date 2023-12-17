@@ -136,6 +136,10 @@ class IndexController extends Controller
     {
         $oldSearch = "";
         $products = $this->storageRepository->getProductSale();
+        $products = $this->productRepository->getProduct();
+        foreach ($products as $product) {
+            $data[] = $product->name;
+        }
         $manufactures = $this->manufactureRepository->getAll();
         $categories = $this->categoryRepository->getAll();
         $column = [
@@ -156,7 +160,7 @@ class IndexController extends Controller
             $count = $this->cartRepository->countProductInCart($user->id);
         }
 
-        return view('client.index', compact('products', 'user', 'count', 'manufactures', 'categories', 'productAll'));
+        return view('client.index', compact('products', 'user', 'count', 'manufactures', 'categories', 'productAll', 'data'));
     }
 
     // show index contact

@@ -554,7 +554,7 @@ class OrderController extends Controller
 
                 $stripe = new StripeClient(env('STRIPE_SECRET'));
                 $paymentIntent = $stripe->paymentIntents->create([
-                    'amount' => $priceHandle,
+                    'amount' => round($priceHandle/23000),
                     'currency' => 'vnd',
                     'automatic_payment_methods' => [
                         'enabled' => true,
