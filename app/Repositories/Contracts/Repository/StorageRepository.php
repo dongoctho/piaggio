@@ -58,7 +58,7 @@ class StorageRepository extends BaseRepository implements StorageRepositoryInter
                                ->where('products.sale', '>', 0)
                                ->where('storages.quantity', '>', '0')
                                ->orderByDesc('sale')
-                               ->limit(3);
+                               ->limit(7);
 
         return $query->get();
     }

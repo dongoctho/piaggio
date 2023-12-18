@@ -20,7 +20,7 @@ class ProductRepository extends BaseRepository implements ProductRepositoryInter
                                 ->join('storages', 'products.id', '=', 'storages.product_id')
                                ->where('storages.quantity', '>', '0')
                                ->orderByDesc('products.created_at')
-                               ->limit(3);
+                               ->limit(7);
 
         return $query->get();
     }
@@ -60,7 +60,7 @@ class ProductRepository extends BaseRepository implements ProductRepositoryInter
         $query->select($column)->where('products.deleted_at', '=', null)
                                ->where('storages.quantity', '>', '0')
                                ->join('storages', 'products.id', '=', 'storages.product_id');
-                               
+
         if (isset($condition['findPrice'])) {
             if ($condition['findPrice'] == 1) {
                 $query->where('price', '<=', 100000000);

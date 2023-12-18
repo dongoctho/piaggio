@@ -136,8 +136,8 @@ class IndexController extends Controller
     {
         $oldSearch = "";
         $products = $this->storageRepository->getProductSale();
-        $products = $this->productRepository->getProduct();
-        foreach ($products as $product) {
+        $productsss = $this->productRepository->getProduct();
+        foreach ($productsss as $product) {
             $data[] = $product->name;
         }
         $manufactures = $this->manufactureRepository->getAll();
