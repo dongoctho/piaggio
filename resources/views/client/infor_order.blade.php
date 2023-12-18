@@ -204,11 +204,13 @@
                     </tbody>
                 </table>
             </div>
-            <div class="col-12 pb-1" style="display: flex;  justify-content: center">
-                {!! $orders->links() !!}
-            </div>
+
+        </div>
+        <div class="col-12 pb-1" style="display: flex;  justify-content: center">
+            {!! $orders->links() !!}
         </div>
     </div>
+
     <!-- Cart End -->
 
 

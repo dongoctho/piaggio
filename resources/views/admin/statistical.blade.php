@@ -119,52 +119,6 @@
                 const data = {
                     labels: labels,
                     datasets: [{
-                        type: 'line',
-                        label: 'Biểu đồ đường',
-                        data: [
-                            {{ $sumSale1[0]['sumSale'] }},
-                            {{ $sumSale2[0]['sumSale'] }},
-                            {{ $sumSale3[0]['sumSale'] }},
-                            {{ $sumSale4[0]['sumSale'] }},
-                            {{ $sumSale5[0]['sumSale'] }},
-                            {{ $sumSale6[0]['sumSale'] }},
-                            {{ $sumSale7[0]['sumSale'] }},
-                            {{ $sumSale8[0]['sumSale'] }},
-                            {{ $sumSale9[0]['sumSale'] }},
-                            {{ $sumSale10[0]['sumSale'] }},
-                            {{ $sumSale11[0]['sumSale'] }},
-                            {{ $sumSale12[0]['sumSale'] }}
-                        ],
-                        backgroundColor: [
-                        'rgba(255, 99, 132, 0.2)',
-                        'rgba(255, 99, 132, 0.2)',
-                        'rgba(255, 99, 132, 0.2)',
-                        'rgba(255, 99, 132, 0.2)',
-                        'rgba(255, 99, 132, 0.2)',
-                        'rgba(255, 99, 132, 0.2)',
-                        'rgba(255, 99, 132, 0.2)',
-                        'rgba(255, 99, 132, 0.2)',
-                        'rgba(255, 99, 132, 0.2)',
-                        'rgba(255, 99, 132, 0.2)',
-                        'rgba(255, 99, 132, 0.2)',
-                        'rgba(255, 99, 132, 0.2)'
-                        ],
-                        borderColor: [
-                        'rgb(255, 99, 132)',
-                        'rgb(255, 99, 132)',
-                        'rgb(255, 99, 132)',
-                        'rgb(255, 99, 132)',
-                        'rgb(255, 99, 132)',
-                        'rgb(255, 99, 132)',
-                        'rgb(255, 99, 132)',
-                        'rgb(255, 99, 132)',
-                        'rgb(255, 99, 132)',
-                        'rgb(255, 99, 132)',
-                        'rgb(255, 99, 132)',
-                        'rgb(255, 99, 132)'
-                        ],
-                        borderWidth: 1
-                    }, {
                         type: 'bar',
                         label: 'Biểu đồ cột',
                         data: [

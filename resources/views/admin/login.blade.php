@@ -135,6 +135,8 @@
                             <a href="{{route('login_google')}}" class="btn btn-google btn-user btn-block">
                                 <i class="fab fa-google fa-fw"></i> Đăng nhập bằng google
                             </a>
+                            <br>
+                            <a href="{{route('forgot_password')}}" class="btn btn-google btn-user btn-block">Quên mật khẩu</a>
                         </form>
                         <div class="social-login">
                             <span class="social-label">Or login with</span>
